@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pro.mapper.ServiceMapper">
+
+	<select id="selectInquiryNum" resultType="int">
+		select
+		inquirynum_seq.nextval from dual
+	</select>
+	<insert id="insertInquiry" parameterType="inquiry">
+		insert into
+		inquiry(inquirynum, type, email, title, content)
+		values(#{inquiryNum}, #{type}, #{email},#{title},#{content})
+	</insert>
+	<select id="selectAllInquiry" parameterType="String"
+		resultType="inquiry">
+		select * from inquiry where email = #{email} order by
+		status asc
+	</select>
+	<select id="selectInquiry" parameterType="int"
+		resultType="inquiry">
+		select * from inquiry where inquirynum = #{inquiryNum}
+	</select>
+	<select id="selectInquiryAnswer" parameterType="int"
+		resultType="inquiryAnswer">
+		select * from inquiry_answer where inquirynum =
+		#{inquiryNum}
+	</select>
+	<delete id="deleteInquiry" parameterType="int">
+		delete from inquiry
+		where inquirynum = #{inquiryNum}
+	</delete>
+	<delete id="deleteInquiryAnswer" parameterType="int">
+		delete from
+		inquiry_answer where inquirynum = #{inquiryNum}
+	</delete>
+	<update id="updateInquiry" parameterType="inquiry">
+		update inquiry set
+		title = #{title}, content = #{content}, type = #{type} where
+		inquirynum = #{inquiryNum}
+	</update>
+	<select id="selectAllAdminInquiry" parameterType="String"
+		resultType="inquiry">
+		select * from inquiry order by status asc
+	</select>
+	<insert id="insertAdminInquiry" parameterType="inquiryAnswer">
+		insert into
+		inquiry_answer(inquirynum,title, content)
+		values(#{inquiryNum},#{title},#{content})
+	</insert>
+	<update id="updateInquiryStatus" parameterType="int">
+		update inquiry
+		set status = 1 where inquirynum = #{inquiryNum}
+	</update>
+	<select id="inquiryAdminSort" parameterType="hashMap" resultType="inquiry">
+		select * from inquiry where type = #{type} and status = #{answer}
+	</select>
+	<insert id="insertFile" parameterType="file">
+		insert into inquiry_file values(#{inquiryNum},(select nvl(max(file_num),0) from inquiry_file where inquiry_num = #{inquiryNum})+1 ,#{path})
+	</insert>
+</mapper>

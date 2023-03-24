@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.3.js"
+    integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+
+    <script>
+        
+
+        $(function(){
+
+           
+
+
+            $('.nick_change').click(function(){
+                location.href = "change_nick.html";
+            });
+            $('.email_change').click(function(){
+                location.href = "change_email.html";
+            });
+            $('.pwd_change').click(function(){
+                location.href = "change_pwd.html";
+            });
+            
+            $('.delete_account').click(function(){
+                if(confirm("회원 탈퇴 후 복구가 불가능합니다. 탈퇴하시겠습니까?") == true){
+                    alert("탈퇴가 완료되었습니다.");
+                    location.replace('');
+                }else{
+                    return;
+                }
+            })
+
+
+        });
+    </script>
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            font-family: 'Jua', sans-serif;
+        }
+
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .header {
+
+            width: 100%;
+            height: 50px;
+            padding: 0px 30px;
+            display: flex;
+            flex-direction: row;
+            position: fixed;
+            background: white;
+            z-index: 1;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        .header ul {
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .header ul>li {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            margin-left: 30px;
+        }
+
+        .logo {
+            width: 80px;
+            height: 100%;
+            padding-top: 10px;
+        }
+
+        .menu {
+            display: flex;
+        }
+
+        .search_bar {
+            position: absolute;
+            right: 200px;
+            margin-top: 10px;
+            width: 200px;
+            height: 30px;
+        }
+
+        .login {
+            position: absolute;
+            right: 100px;
+            margin-top: 17px;
+
+        }
+
+        .search_img {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            top: 17px;
+            right: 410px;
+        }
+
+        .section {
+            width: 1200px;
+            padding: 20px 20px;
+            margin: 0 auto;
+            position: relative;
+            top: 80px;
+            /* border: 1px solid black; */
+        }
+
+        .profile img {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            border: 1px solid black;
+            border-radius: 50%;
+
+        }
+
+        table p {
+            display: inline-block;
+            border: 1px solid black;
+            border-radius: 5px;
+            padding: 5px 5px;
+            cursor: pointer;
+        }
+
+        .section td {
+            width: 100px;
+            height: 80px;
+
+        }
+        .profile{
+            margin-top: 30px;
+        }
+        .profile_img {
+            height: 60px;
+        }
+
+        hr {
+            margin: 30px 0px;
+        }
+
+        .email {
+            width: 200px !important;
+            text-align: left;
+        }
+        .alarm{
+            text-align: center;
+            
+        }
+        .alarm td{
+            width: 50px;
+            height: 30px;
+        }
+        .nick_change, .email_change, .pwd_change{
+            cursor: pointer;
+        }
+        .nick_change{
+            margin-left: 40px;
+        }
+        input[type=file]{
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <th:block th:include="fragments/main_header" ></th:block>
+
+
+
+    <div class="section">
+        <h2>회원정보 변경 / 알림설정</h2>
+        <div class="profile">
+            <h2>프로필 변경</h2>
+            <table>
+                <tr class="profile_img">
+                    <td><img src="#" alt="profile"></td>
+                    <td>
+                        <input type="file">이미지 변경
+                    </td>
+                </tr>
+                <tr>
+                    <td>닉네임</td>
+                    <td>[[${session.dto.nick}]]<p class="nick_change"><a href="/member/nick/change">닉네임 변경</a></p></td>
+                    <td>
+                        
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <hr>
+
+        <div class="profile">
+            <h2>프로필 변경</h2>
+            <table>
+                <tr class="profile_img">
+                    <td>이메일</td>
+                    <td class="email">[[${session.dto.email}]]</td>
+                    <td>
+                        <p class="email_change"><a href="/member/email/change">이메일 변경</a></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>비밀번호</td>
+                    <td>[[${session.dto.passwd}]]</td>
+                    <td>
+                        <p class="pwd_change"><a href="/member/passwd/change">비밀번호 변경</a></p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <hr>
+
+        <div class="profile">
+            <h2>알림 설정</h2>
+            <table class="alarm_table">
+                <tr class="alarm">
+                    <td><input type="checkbox"></td>
+                    <td class="email">이벤트 알림 설정</td>
+                </tr>
+                <tr class="alarm">
+                    <td><input type="checkbox"></td>
+                    <td class="email">이메일 수신</td>
+                </tr>
+                <tr class="alarm">
+                    <td><input type="checkbox"></td>
+                    <td class="email">핸드폰 알림</td>
+                </tr>
+            </table>
+        </div>
+
+        <hr>
+
+        <a href="/member/delete" class="delete_account">회원 탈퇴</a>
+
+    </div>
+
+</body>
+
+</html>

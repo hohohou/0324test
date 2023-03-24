@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            font-family: 'Jua', sans-serif;
+        }
+
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .header {
+
+            width: 100%;
+            height: 50px;
+            padding: 0px 30px;
+            display: flex;
+            flex-direction: row;
+            position: fixed;
+            background: white;
+            z-index: 1;
+        }
+
+        .logo {
+            width: 80px;
+            height: 100%;
+            padding-top: 10px;
+            position: relative;
+            left: 0px;
+        }
+
+        .header>p {
+            margin-left: 30px;
+            margin-top: 17px;
+        }
+
+        .user {
+            margin-top: 17px;
+            display: flex;
+            flex-direction: row;
+            position: inherit;
+            right: 50px;
+        }
+
+        .user ul {
+            margin-right: 30px;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        .header ul {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .header ul li {
+            margin-right: 20px;
+            margin-top: -2px;
+        }
+
+        .section {
+            width: 960px;
+            position: relative;
+            top: 80px;
+            margin: 0 auto;
+            /* border: 1px solid black; */
+            padding: 20px 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-color: rgb(138, 138, 138);
+            box-sizing: border-box;
+            margin: 30px auto;
+            width: 700px;
+            text-align: center;
+
+        }
+
+
+        td {
+            padding: 10px 0px;
+            border-top: 1px solid;
+            border-bottom: 1px solid;
+
+        }
+    </style>
+</head>
+
+
+<th:block th:include="fragments/service_center_header" ></th:block>
+<th:block th:if="${session.dto == null} and ${session.addto == null}">
+    <script>
+        alert('로그인 후 이용하실 수 있습니다.');
+        location.href = "/login/view";
+    </script>
+</th:block>
+
+<div class="section">
+    <div>
+        <h2>내 문의내역</h2>
+        <p>내가 문의한 내역을 살펴볼 수 있습니다.</p>
+    </div>
+    <div class="list">
+        <table>
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>제목</th>
+                    <th >답변 여부</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr  th:if="${#lists.isEmpty(list)}">
+                    <td colspan="4"> 문의 내용이 없습니다.</td>
+                </tr>
+            </tbody>
+
+            <tbody>
+                <th:block  th:each="list : ${list}">
+                    <tr>
+                        <td>[[${list.inquiryNum}]]</td>
+                        <td><a
+                                th:href="@{/inquiry/answer/{inquiryNum}(inquiryNum=${list.inquiryNum })}">[[${list.title}]]</a>
+                        </td>
+                        <td th:if="${list.status} == 0">답변 없음 
+                        <td th:if="${list.status} == 1">답변 완료</td>
+                    </tr>
+                </th:block>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+
+</html>

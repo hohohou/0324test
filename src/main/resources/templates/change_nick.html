@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+
+    <script>
+        $(function () {
+            $('[name=nick]').on('change', function () {
+                var nick = $(this).val();
+                var getName = RegExp(/^[가-힣]+$/);
+
+                if (nick.length > 15) {
+                    $('#nick').addClass('error').show().html('닉네임은 최대 15자리까지 가능합니다.');
+                    $(this).addClass('red');
+
+                } else {
+                    $('#nick').removeClass('error').hide();
+                    $(this).removeClass('red');
+                    $(this).addClass('blue');
+
+                }
+                if (!getName.test(nick)) {
+                    $('#nick').addClass('error').show().html('닉네임을 정확히 입력해주세요.');
+                    $(this).addClass('red');
+
+                } else {
+                    $('#nick').removeClass('error').hide();
+                    $(this).removeClass('red');
+                    $(this).addClass('blue');
+
+                }
+
+            });
+
+
+
+            $('.btn_blue').click(function(){
+                if($('[name=nick]').hasClass('blue') == true &&
+                $('[name=nick]').hasClass('red') == false){
+                    alert("변경이 완료되었습니다.");
+                    location.replace('change_main.html');
+                    return true;
+                }else{
+                    alert("다시 입력해주세요");
+                }
+            });
+
+
+
+        });
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+    </style>
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            font-family: 'Jua', sans-serif;
+        }
+
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .header {
+
+            width: 100%;
+            height: 50px;
+            padding: 0px 30px;
+            display: flex;
+            flex-direction: row;
+            position: fixed;
+            background: white;
+            z-index: 1;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        .header ul {
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .header ul>li {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            margin-left: 30px;
+        }
+
+        .logo {
+            width: 80px;
+            height: 100%;
+            padding-top: 10px;
+        }
+
+        .menu {
+            display: flex;
+        }
+
+        .search_bar {
+            position: absolute;
+            right: 200px;
+            margin-top: 10px;
+            width: 200px;
+            height: 30px;
+        }
+
+        .login {
+            position: absolute;
+            right: 100px;
+            margin-top: 17px;
+
+        }
+
+        .search_img {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            top: 17px;
+            right: 410px;
+        }
+
+        .create_account_step01 {
+            width: 300px;
+            margin: 0 auto;
+            /* border: 1px solid black; */
+            position: relative;
+            top: 200px;
+
+        }
+
+        .main_logo {
+            display: block;
+            margin: 0 auto;
+            width: 300px;
+            height: 100px;
+        }
+
+        .total_agree {
+            margin: 0 auto;
+            padding: 20px 15px;
+
+        }
+
+        .create_account_step01 input {
+            display: inline-block;
+
+        }
+
+        .create_account_step01 span {
+            padding-left: 15px;
+
+        }
+
+        .total_agree p {
+            margin-left: 25px;
+            font-size: 0.8em;
+        }
+
+        .create_account_step01 li {
+            padding: 8px 0px;
+            padding-left: 15px;
+        }
+
+        .create_account_step01 i {
+            color: blue;
+            font-style: normal;
+        }
+
+
+        .create_account_step01 .btn {
+            display: inline-block;
+            width: 310px;
+            height: 50px;
+            /* margin: 0px 10px; */
+            margin-top: 10px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .btn_blue {
+            background-color: #2E6AFD;
+            color: white;
+        }
+
+        .btn_gray {
+            background-color: #C8C8C8;
+            color: white;
+        }
+
+        .error {
+            text-align: center;
+            margin-top: 10px;
+            color: red;
+            font-size: 0.8em;
+        }
+
+        input[type=text] {
+            width: 300px;
+            height: 30px;
+            margin-bottom: 20px;
+            margin-top: 5px;
+            border-radius: 5px;
+        }
+
+        select {
+            width: 95px;
+            height: 30px;
+            padding-right: 10px;
+            border-radius: 5px;
+        }
+
+        .create_account_step01 a {
+            display: inline-block;
+            border: 1px solid black;
+            margin-bottom: 40px;
+        }
+
+        .change {
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        .error {
+            text-align: center;
+            color: red;
+            font-size: 0.8em;
+        }
+
+        .blue {
+            border-color: blue;
+        }
+
+        .red {
+            border-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+
+        <div class="logo"><img src="img/logo.png"></div>
+        <div class="menu">
+            <ul>
+                <li><a href="#">태그검색</a></li>
+                <li><a href="#">요일별 작품</a></li>
+                <li><a href="#">테마검색</a></li>
+                <li><a href="#">멤버쉽</a></li>
+
+            </ul>
+            <img src="img/search.png" class="search_img">
+            <input type="text" class="search_bar" placeholder="제목,제작사,감독으로 검색(초성)">
+        </div>
+
+
+
+        <div class="login">
+            <a href="#">로그인/가입</a>
+        </div>
+    </div>
+
+
+
+
+    <div class="create_account_step01">
+        <form action="">
+            <a href="#" class="main_logo"></a>
+            <p>닉네임 변경</p>
+            <div class="change">
+                <p>닉네임</p>
+            <input type="text" name="nick" placeholder="닉네임을 입력해주세요">
+            <p id="nick"></p>
+            </div>
+
+            <div class="btn_container">
+                <button type="button" class="btn btn_blue">변경 완료</button>
+            </div>
+        </form>
+    </div>
+
+
+
+
+</body>
+
+</html>

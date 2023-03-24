@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+    </style>
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            font-family: 'Jua', sans-serif;
+        }
+
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .header {
+
+            width: 100%;
+            height: 50px;
+            padding: 0px 30px;
+            display: flex;
+            flex-direction: row;
+            position: fixed;
+            background: white;
+            z-index: 1;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        .header ul {
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .header ul>li {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            margin-left: 30px;
+        }
+
+        .logo {
+            width: 80px;
+            height: 100%;
+            padding-top: 10px;
+        }
+
+        .menu {
+            display: flex;
+        }
+
+        .search_bar {
+            position: absolute;
+            right: 200px;
+            margin-top: 10px;
+            width: 200px;
+            height: 30px;
+        }
+
+        .login {
+            position: absolute;
+            right: 100px;
+            margin-top: 17px;
+
+        }
+
+        .search_img {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            top: 17px;
+            right: 410px;
+        }
+
+
+        .container {
+            width: 1200px;
+            height: 800px;
+            /* border: 1px solid black; */
+            margin: 0 auto;
+            position: relative;
+            top: 80px;
+            display: flex;
+            flex-direction: row;
+
+
+        }
+
+        .mypage_menu {
+            width: 300px;
+            height: 800px;
+            padding: 30px 30px;
+
+
+
+        }
+
+        .profile {
+            text-align: center;
+            padding: 10px;
+            width: 100%;
+            height: 300px;
+
+
+        }
+
+        .profile .profile_manage {
+            display: inline-block;
+            border: 1px solid black;
+            margin-top: 15px;
+            padding: 3px 3px;
+            border-radius: 5px;
+            font-size: 0.8em;
+
+        }
+
+        .contents {
+            width: 900px;
+            height: 800px;
+            position: relative;
+        }
+
+        .mypage_menu img {
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+
+        .name>p {
+            font-size: 1.5em;
+        }
+
+        .review_inventory {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            padding: 30px 20px;
+        }
+
+        .review,
+        .inventory {
+            border: 1px solid black;
+            margin-top: 10px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 1.2em;
+        }
+
+        .contents_menu {
+            display: flex;
+            flex-direction: row;
+            
+
+        }
+        .delete{
+            position: absolute;
+            right: 20px;
+            padding-top: 15px;
+            display: flex;
+            flex-direction: row;
+        }
+        .delete img{
+            width: 22px;
+            height: 22px;
+
+        }
+        .contents {
+            padding: 20px 20px;
+
+        }
+
+        .star,
+        .review_detail {
+            border: 1px solid black;
+            margin-top: 10px;
+            padding: 5px 20px;
+            border-radius: 5px;
+            font-size: 1.2em;
+        }
+
+        .review_detail {
+            margin-left: 10px;
+        }
+
+        .subject_menu {
+            padding: 30px 0px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .sort select {
+            height: 30px;
+        }
+
+        .subject {
+            position: relative;
+        }
+
+        .work {
+            height: 660px;
+            display: flex;
+            flex-flow: row wrap;
+            overflow: auto;
+        }
+
+
+        .thumnail {
+
+            width: 250px;
+            height: 150px;
+            border: 1px solid black;
+            margin-bottom: 10px;
+        }
+
+        .each_work {
+            display: flex;
+            flex-direction: column;
+            margin-right: 5px;
+            margin-bottom: 10px;
+        }
+
+        .each_work p {
+            margin-bottom: 10px;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div class="header">
+
+        <div class="logo"><img src="img/logo.png"></div>
+        <div class="menu">
+            <ul>
+                <li><a href="#">태그검색</a></li>
+                <li><a href="#">요일별 작품</a></li>
+                <li><a href="#">테마검색</a></li>
+                <li><a href="#">멤버쉽</a></li>
+
+            </ul>
+            <img src="img/search.png" class="search_img">
+            <input type="text" class="search_bar" placeholder="제목,제작사,감독으로 검색(초성)">
+        </div>
+
+
+
+        <div class="login">
+            <a href="#">로그인/가입</a>
+        </div>
+
+
+    </div>
+
+    <div class="container">
+        <div class="mypage_menu">
+            <p>프로필 정보</p>
+            <div class="profile">
+                <img src="img/logo.png" alt="profile_img">
+                <div class="name">
+                    <p>마홈스</p>
+                    <p class="profile_manage">프로필 관리</p>
+                </div>
+                <div class="review_inventory">
+                    <div class="review">
+                        <p>내활동</p>
+                    </div>
+                    <div class="inventory">
+                        <p>보관함</p>
+                    </div>
+                </div>
+            </div>
+            <div class="ad">
+                <!-- 이미지 들어갈 영역 -->
+            </div>
+        </div>
+        <div class="contents">
+            <p>내활동</p>
+            <div class="contents_menu">
+                    <div class="star">
+                        <p>별점</p>
+                    </div>
+                    <div class="review_detail">
+                        <p>리뷰</p>
+                    </div>
+                    <div class="delete">
+                        <img src="img/delete.png"><p>삭제</p>
+                    </div>
+            </div>
+            <div class="subject">
+                <div class="subject_menu">
+                    <div class="quantity">
+                        <p>작품 수 (<em></em>)</p>
+                    </div>
+                    <div class="sort">
+                        <select name="sort_choice">
+                            <option value="">-- 정렬 순 --</option>
+                            <option value="recent">최근 순</option>
+                            <option value="old">오래된 순</option>
+                            <option value="high">별점 높은 순</option>
+                            <option value="low">별점 낮은 순</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="work">
+                    <div class="each_work">
+                        <div class="thumnail">
+                            <!-- 작품 썸네일 -->
+                        </div>
+                        <p>가정교사 히트맨 리본</p>
+                        <span>200화</span>
+                    </div>
+                    <div class="each_work">
+                        <div class="thumnail">
+                            <!-- 작품 썸네일 -->
+                        </div>
+                        <p>가정교사 히트맨 리본</p>
+                        <span>200화</span>
+                    </div>
+                    <div class="each_work">
+                        <div class="thumnail">
+                            <!-- 작품 썸네일 -->
+                        </div>
+                        <p>가정교사 히트맨 리본</p>
+                        <span>200화</span>
+                    </div>
+                    <div class="each_work">
+                        <div class="thumnail">
+                            <!-- 작품 썸네일 -->
+                        </div>
+                        <p>가정교사 히트맨 리본</p>
+                        <span>200화</span>
+                    </div>
+                    <div class="each_work">
+                        <div class="thumnail">
+                            <!-- 작품 썸네일 -->
+                        </div>
+                        <p>가정교사 히트맨 리본</p>
+                        <span>200화</span>
+                    </div>
+                    <div class="each_work">
+                        <div class="thumnail">
+                            <!-- 작품 썸네일 -->
+                        </div>
+                        <p>가정교사 히트맨 리본</p>
+                        <span>200화</span>
+                    </div>
+                    <div class="each_work">
+                        <div class="thumnail">
+                            <!-- 작품 썸네일 -->
+                        </div>
+                        <p>가정교사 히트맨 리본</p>
+                        <span>200화</span>
+                    </div>
+                    <div class="each_work">
+                        <div class="thumnail">
+                            <!-- 작품 썸네일 -->
+                        </div>
+                        <p>가정교사 히트맨 리본</p>
+                        <span>200화</span>
+                    </div>
+                    <div class="each_work">
+                        <div class="thumnail">
+                            <!-- 작품 썸네일 -->
+                        </div>
+                        <p>가정교사 히트맨 리본</p>
+                        <span>200화</span>
+                    </div>
+                    <div class="each_work">
+                        <div class="thumnail">
+                            <!-- 작품 썸네일 -->
+                        </div>
+                        <p>가정교사 히트맨 리본</p>
+                        <span>200화</span>
+                    </div>
+                    <div class="each_work">
+                        <div class="thumnail">
+                            <!-- 작품 썸네일 -->
+                        </div>
+                        <p>가정교사 히트맨 리본</p>
+                        <span>200화</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    </div>
+
+
+</body>
+
+</html>

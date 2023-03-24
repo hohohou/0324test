@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+        </style>
+        
+    <style>
+        
+        * {
+            padding: 0;
+            margin: 0;
+            font-family: 'Jua', sans-serif;
+        }
+
+
+        a{
+            text-decoration: none;
+            color: black;
+        }
+
+        .header{
+
+            width: 100%;
+            height: 50px;
+            padding: 0px 30px;
+            display: flex;
+            flex-direction: row;
+            position: fixed;
+        }
+        
+        ul{
+            list-style-type: none;
+        }
+        .header ul{
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+        .header ul > li {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            margin-left: 30px;
+        }
+        .logo{
+            width: 80px;
+            height: 100%;
+            padding-top: 10px;
+        }
+        .menu{
+            display: flex;
+        }
+        .search_bar{
+            position: absolute;
+            right: 200px;
+            margin-top: 10px;
+            width: 200px;
+            height: 30px;
+        }
+        .login{
+            position: absolute;
+            right: 100px;
+            margin-top: 17px;
+
+        }
+        .search_img{
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            top: 17px;
+            right: 410px;
+        }
+        
+
+        .section{
+            width: 1800px;
+            padding: 20px 20px;
+            margin: 0 auto;
+            position: relative;
+            top: 80px;
+            /* border: 1px solid black; */
+        }
+        .work{
+            /* border: 1px solid black; */
+            margin-top: 20px;
+            display: flex;
+            flex-flow: row wrap;
+
+            
+        }
+      
+
+
+        .thumnail {
+
+            width: 200px;
+            height: 150px;
+            border: 1px solid black;
+            margin-bottom: 10px;
+        }
+
+        .each_work {
+            display: flex;
+            flex-direction: column;
+            margin-right: 5px;
+            margin-bottom: 10px;
+            margin-left: 17px;
+        }
+
+        .each_work p {
+            margin-bottom: 10px;
+            
+        }
+        .week{
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+       
+            <div class="logo"><img src="img/logo.png"></div>
+            <div class="menu">
+                <ul>
+                    <li><a href="#">태그검색</a></li>
+                    <li><a href="#">요일별 작품</a></li>
+                    <li><a href="#">테마검색</a></li>
+                    <li><a href="#">멤버쉽</a></li>
+                    
+                </ul>
+                <img src="img/search.png" class="search_img">
+                <input type="text" class="search_bar" placeholder="제목,제작사,감독으로 검색(초성)">
+            </div>
+
+      
+
+        <div class="login">
+            <a href="#">로그인/가입</a>
+        </div>
+
+        
+
+    </div>
+    <div class="section">
+        <h2>요일별 신작</h2>
+        <p>[공지] 극장판 전생했더니 슬라임이었던 건 이벤트 당첨자 경품 수령 안내</p>
+        <div class="week">
+        <div class="choice">요일 전체</div>
+        <div class="choice">월요 작품</div>
+        <div class="choice">화요 작품</div>
+        <div class="choice">수요 작품</div>
+        <div class="choice">목요 작품</div>
+        <div class="choice">금요 작품</div>
+        <div class="choice">토요 작품</div>
+        <div class="choice">일요 작품</div>
+    </div>
+        <div class="work">
+            
+           
+            <div class="each_work">
+                <div class="thumnail">
+                    <!-- 작품 썸네일 -->
+                </div>
+                <p>가정교사 히트맨 리본</p>
+                <span>200화</span>
+            </div><div class="each_work">
+                <div class="thumnail">
+                    <!-- 작품 썸네일 -->
+                </div>
+                <p>가정교사 히트맨 리본</p>
+                <span>200화</span>
+            </div><div class="each_work">
+                <div class="thumnail">
+                    <!-- 작품 썸네일 -->
+                </div>
+                <p>가정교사 히트맨 리본</p>
+                <span>200화</span>
+            </div><div class="each_work">
+                <div class="thumnail">
+                    <!-- 작품 썸네일 -->
+                </div>
+                <p>가정교사 히트맨 리본</p>
+                <span>200화</span>
+            </div><div class="each_work">
+                <div class="thumnail">
+                    <!-- 작품 썸네일 -->
+                </div>
+                <p>가정교사 히트맨 리본</p>
+                <span>200화</span>
+            </div><div class="each_work">
+                <div class="thumnail">
+                    <!-- 작품 썸네일 -->
+                </div>
+                <p>가정교사 히트맨 리본</p>
+                <span>200화</span>
+            </div><div class="each_work">
+                <div class="thumnail">
+                    <!-- 작품 썸네일 -->
+                </div>
+                <p>가정교사 히트맨 리본</p>
+                <span>200화</span>
+            </div><div class="each_work">
+                <div class="thumnail">
+                    <!-- 작품 썸네일 -->
+                </div>
+                <p>가정교사 히트맨 리본</p>
+                <span>200화</span>
+            </div><div class="each_work">
+                <div class="thumnail">
+                    <!-- 작품 썸네일 -->
+                </div>
+                <p>가정교사 히트맨 리본</p>
+                <span>200화</span>
+            </div><div class="each_work">
+                <div class="thumnail">
+                    <!-- 작품 썸네일 -->
+                </div>
+                <p>가정교사 히트맨 리본</p>
+                <span>200화</span>
+            </div><div class="each_work">
+                <div class="thumnail">
+                    <!-- 작품 썸네일 -->
+                </div>
+                <p>가정교사 히트맨 리본</p>
+                <span>200화</span>
+            </div><div class="each_work">
+                <div class="thumnail">
+                    <!-- 작품 썸네일 -->
+                </div>
+                <p>가정교사 히트맨 리본</p>
+                <span>200화</span>
+            </div><div class="each_work">
+                <div class="thumnail">
+                    <!-- 작품 썸네일 -->
+                </div>
+                <p>가정교사 히트맨 리본</p>
+                <span>200화</span>
+            </div><div class="each_work">
+                <div class="thumnail">
+                    <!-- 작품 썸네일 -->
+                </div>
+                <p>가정교사 히트맨 리본</p>
+                <span>200화</span>
+            </div><div class="each_work">
+                <div class="thumnail">
+                    <!-- 작품 썸네일 -->
+                </div>
+                <p>가정교사 히트맨 리본</p>
+                <span>200화</span>
+            </div><div class="each_work">
+                <div class="thumnail">
+                    <!-- 작품 썸네일 -->
+                </div>
+                <p>가정교사 히트맨 리본</p>
+                <span>200화</span>
+            </div><div class="each_work">
+                <div class="thumnail">
+                    <!-- 작품 썸네일 -->
+                </div>
+                <p>가정교사 히트맨 리본</p>
+                <span>200화</span>
+            </div><div class="each_work">
+                <div class="thumnail">
+                    <!-- 작품 썸네일 -->
+                </div>
+                <p>가정교사 히트맨 리본</p>
+                <span>200화</span>
+            </div><div class="each_work">
+                <div class="thumnail">
+                    <!-- 작품 썸네일 -->
+                </div>
+                <p>가정교사 히트맨 리본</p>
+                <span>200화</span>
+            </div><div class="each_work">
+                <div class="thumnail">
+                    <!-- 작품 썸네일 -->
+                </div>
+                <p>가정교사 히트맨 리본</p>
+                <span>200화</span>
+            </div><div class="each_work">
+                <div class="thumnail">
+                    <!-- 작품 썸네일 -->
+                </div>
+                <p>가정교사 히트맨 리본</p>
+                <span>200화</span>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

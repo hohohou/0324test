@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" th:inline="javascript">
+        $(function () {
+            $('#btn_update').click(function () {
+                alert('수정이 완료되었습니다..');
+
+            });
+
+        });
+    </script>
+
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            font-family: 'Jua', sans-serif;
+        }
+
+
+        a {
+            text - decoration: none;
+            color: black;
+        }
+
+        .header {
+
+            width: 100%;
+            height: 50px;
+            padding: 0px 30px;
+            display: flex;
+            flex-direction: row;
+            position: fixed;
+            background: white;
+            z-index: 1;
+        }
+
+        .logo {
+            width: 80px;
+            height: 100%;
+            padding-top: 10px;
+            position: relative;
+            left: 0px;
+        }
+
+        .header>p {
+            margin - left: 30px;
+            margin-top: 17px;
+        }
+
+        .user {
+            margin - top: 17px;
+            display: flex;
+            flex-direction: row;
+            position: inherit;
+            right: 50px;
+        }
+
+        .user ul {
+            margin - right: 30px;
+        }
+
+        ul {
+            list - style - type: none;
+        }
+
+        .header ul {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .header ul li {
+            margin - right: 20px;
+            margin-top: -2px;
+        }
+
+        .container {
+            width: 960px;
+            position: relative;
+            top: 80px;
+            margin: 0 auto;
+            /* border: 1px solid black; */
+            padding: 20px 20px;
+        }
+
+        .container table {
+            margin: 30px 0px;
+
+        }
+
+        .container table td {
+            padding: 10px 20px;
+        }
+
+        .container input[type=text] {
+            width: 300px;
+            height: 30px;
+        }
+
+        .detail {
+            height: 200px !important;
+        }
+
+        .head {
+            width: 60px;
+        }
+    </style>
+</head>
+
+<body>
+    <th:block th:include="fragments/service_center_header"></th:block>
+
+    <div class="container">
+        <form action="/inquiry/update" enctype="multipart/form-data" method="post">
+            <input type="hidden" name="inquiryNum" th:value="${dto.inquiryNum}">
+            <h2>수정 하기</h2>
+            <table>
+                <tr>
+                    <th>이메일</th>
+                    <td>
+                        <input type="text" name="email" readonly th:value="${dto.email}">
+                    </td>
+                </tr>
+                <tr>
+                    <td>문의 유형</td>
+                    <td><select name="type">
+                            <option value="">---문의유형 선택---</option>
+                            <option value="login">회원계정 / 로그인</option>
+                            <option value="refund">환불 / 혜지</option>
+                            <option value="error">오류 / 문제해결</option>
+                            <option value="membership">결제 / 멤버쉽</option>
+                            <option value="how">이용방법</option>
+                            <option value="event">이벤트 / 혜택</option>
+                        </select></td>
+                </tr>
+                <tr>
+                    <td class="head">제목</td>
+                    <td><input type="text" name="title" th:value="${dto.title}"></td>
+                </tr>
+                <tr>
+                    <td class="head">내용</td>
+                    <td><input type="text" class="detail" name="content" th:value="${dto.content}"></td>
+                </tr>
+
+            </table>
+            <hr>
+            <button type="button"><a href="javascript:history.back();">뒤로가기</a></button>
+            <button type="submit" id="btn_update">수정하기</button>
+
+
+        </form>
+
+    </div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+        </style>
+        
+    <style>
+        
+        * {
+            padding: 0;
+            margin: 0;
+            font-family: 'Jua', sans-serif;
+        }
+
+
+        a{
+            text-decoration: none;
+            color: black;
+        }
+
+        .header{
+
+            width: 100%;
+            height: 50px;
+            padding: 0px 30px;
+            display: flex;
+            flex-direction: row;
+            position: fixed;
+            background: white;
+            z-index: 1;
+        }
+        .logo{
+            width: 80px;
+            height: 100%;
+            padding-top: 10px;
+            position: relative;
+            left: 0px;
+        }
+        .header > p{
+            margin-left: 30px;
+            margin-top: 17px;
+        }
+        
+        .user{
+            margin-top: 17px;
+            display: flex;
+            flex-direction: row;
+            position: inherit;
+            right: 50px;
+        }
+        .user ul{
+            margin-right: 30px;
+        }
+        ul{
+            list-style-type: none;
+        }
+        .header ul{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+        .header ul li{
+            margin-right: 20px;
+            margin-top: -2px;
+        }
+
+        .search_section{
+            width: 100%;
+            height: 400px;
+            position: absolute;
+            top: 50px;
+            border: 1px solid black;
+            text-align: center;
+        }
+        .search_bar_section{
+            position: relative;
+            display: inline-block;
+            top: 200px;
+            width: 400px;
+            height: 100px;
+            /* border: 1px solid black; */
+            padding-top: 20px;
+        }
+        .search_bar{
+            width: 350px;
+            height: 30px;
+            margin-top: 20px;
+        }
+        .announcement{
+            width: 1500px;
+            height: 400px;
+            margin: 0 auto;
+            position: relative;
+            top: 450px;
+            /* border: 1px solid black; */
+            padding: 20px 20px;
+        }
+        .announcement a{
+            font-size: 1.2em;
+        }
+        .announcement ul{
+            list-style-type: none;
+        }
+        .announcement li{
+            padding: 25px 0px;
+        }
+        .question{
+            width: 1500px;
+            height: 300px;
+            margin: 0 auto;
+            position: relative;
+            top: 450px;
+            /* border: 1px solid black; */
+            padding: 20px 20px;
+        }
+        .question_box{
+            position: relative;
+            display: flex;
+            height: 300px;
+            flex-flow: column wrap;
+            justify-content: center;
+        }
+        .question_box a{
+            display: inline-block;
+            width: 450px;
+            text-align: center;
+            padding: 20px 30px;
+            border: 1px solid black;
+            margin: 10px 10px;
+        }
+        .question h3{
+            font-size: 1.2em;
+        }
+        .telnum_img{
+            position: relative;
+            width: 500px;
+            height: 300px;
+            margin: 0 auto;
+            margin-top: 60px;
+            top: 450px;
+            border: 1px solid black;
+        }
+       
+    </style>
+</head>
+
+<body>
+	
+	<th:block th:include="fragments/service_center_header"></th:block>
+   
+
+
+
+    <div class="search_section">
+        <div class="search_bar_section">
+            <p>궁금한 점이 있다면<br>검색으로 문제를 빠르게 해결하세요!</p>
+            <input type="text" class="search_bar">
+        </div>
+    </div>
+
+    <div class="announcement">
+        <a href="#"><h3>공지사항 ></h3></a>
+        <ul>
+            <li>서버 시스템 점검 안내 - 2월 13일 (월)</li>
+            <li>[공지] 극장판 전생했더니 슬라임이었던 건 이벤트 당첨자 경품 수령 안내</li>
+            <li>[공지] 이메일 인증 및 이메일 로그인 의무화 안내</li>
+            <li>[공지] 리디(RIDI) 간편 로그인 서비스 종료 안내</li>
+            <li>[공지] 개인정보 처리방침 개정 안내</li>
+        </ul>
+    </div>
+
+    <div class="question">
+        <h3>자주 묻는 질문</h3>
+        <div class="question_box">
+            <a href="#">회원계정 / 로그인</a>
+            <a href="#">환불 / 혜지</a>
+            <a href="#">오류 / 문제해결</a>
+            <a href="#">결제 / 멤버쉽</a>
+            <a href="#">이용방법</a>
+            <a href="#">이벤트 / 혜택</a>
+        </div>
+    </div>
+
+    <div class="telnum_img">
+        <img src="" alt="telnum">
+    </div>
+</body>
+
+</html>
