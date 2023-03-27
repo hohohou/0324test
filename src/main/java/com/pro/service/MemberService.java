@@ -34,6 +34,10 @@ public class MemberService {
 		
 		return mapper.checkPasswd(dto);
 	}
+	public int deleteMember(String email) {
+		
+		return mapper.deleteMember(email);
+	}
 	
 	
 	

@@ -11,7 +11,15 @@
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" th:inline="javascript">
-       
+       $(function(){
+            $('#btn_update').click(function(){
+                location.href = "/inquiry/update/view/[[${dto.inquiryNum}]]";
+            });
+            $('#btn_delete').click(function(){
+                alert('삭제가 완료되었습니다.');
+                location.href = "/inquiry/delete/[[${dto.inquiryNum}]]";
+            });
+       });
     </script>
 
 
@@ -154,6 +162,9 @@
                 <td><input type="text" class="detail" readonly placeholder="답변 없음"></td>
             </tr>
         </table>
+        <button type="button" id="btn_update" th:if="${adto == null}">수정하기</button>
+        <button type="button" id="btn_delete">삭제하기</button>
+
 
         
    

@@ -20,22 +20,14 @@
            
 
 
-            $('.nick_change').click(function(){
-                location.href = "change_nick.html";
-            });
-            $('.email_change').click(function(){
-                location.href = "change_email.html";
-            });
-            $('.pwd_change').click(function(){
-                location.href = "change_pwd.html";
-            });
+          
             
             $('.delete_account').click(function(){
                 if(confirm("회원 탈퇴 후 복구가 불가능합니다. 탈퇴하시겠습니까?") == true){
                     alert("탈퇴가 완료되었습니다.");
-                    location.replace('');
+                    location.href ="/member/delete/[[dto.email]]"
                 }else{
-                    return;
+                    alert("취소하였습니다.");
                 }
             })
 
@@ -255,7 +247,7 @@
 
         <hr>
 
-        <a href="/member/delete" class="delete_account">회원 탈퇴</a>
+        <button type="button" class="delete_account">회원 탈퇴</button>
 
     </div>
 

@@ -18,4 +18,6 @@ public interface MemberMapper {
 
 	int checkPasswd(MemberDTO dto);
 
+	int deleteMember(String email);
+
 }

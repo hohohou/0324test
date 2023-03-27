@@ -17,4 +17,7 @@
 	<select id="checkPasswd" parameterType="member" resultType="String">
 		select passwd from member where passwd = #{passwd}
 	</select>
+	<delete id="deleteMemeber">
+		delete from member where email = #{email}
+	</delete>
 </mapper>

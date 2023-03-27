@@ -123,6 +123,13 @@ public class MemberController {
 		return "change_pwd";
 	}
 	
+	@RequestMapping("/member/delete/{email}")
+	public String deleteMember(@PathVariable("email") String email) {
+		int result = memberService.deleteMember(email);
+		
+		return "redirect:/";
+	}
+	
 	
 
 	
