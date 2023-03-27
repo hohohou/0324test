@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.Server;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -122,8 +123,10 @@ public class ServiceCenterController {
 		ModelAndView view = new ModelAndView();
 		InquiryDTO dto = serviceService.selectInquiry(inquiryNum);
 		InquiryAnswerDTO adto = serviceService.selectInquiryAnswer(inquiryNum);
+		List<FileDTO> flist = serviceService.selectFileList(inquiryNum);
 		view.addObject("adto", adto);
 		view.addObject("dto", dto);
+		view.addObject("flist", flist);
 		view.setViewName("service_center_inquiry_answer");
 
 		return view;

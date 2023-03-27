@@ -40,7 +40,7 @@ public interface ServiceMapper {
 
 	int selectImageFileNum();
 
-	
+	List<FileDTO> selectFileList(int inquiryNum);
 
 
 }

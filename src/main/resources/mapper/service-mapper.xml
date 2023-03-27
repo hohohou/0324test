@@ -59,6 +59,9 @@
 	<insert id="insertFile" parameterType="file">
 		insert into inquiry_file values(#{inquiryNum},(select nvl(max(file_num),0) from inquiry_file where inquiry_num = #{inquiryNum})+1 ,#{path})
 	</insert>
+	<select id="selectFileList" parameterType="int" resultType="file">
+		select * from inquiry_file where inquirynum = #{inquiryNum}
+	</select>
 	
 	
 </mapper>

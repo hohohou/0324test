@@ -69,6 +69,10 @@ public class ServiceCenterService {
 		
 		return serviceMapper.insertFile(fileDTO);
 	}
+	public List<FileDTO> selectFileList(int inquiryNum) {
+		
+		return serviceMapper.selectFileList(inquiryNum);
+	}
 	
 	
 	

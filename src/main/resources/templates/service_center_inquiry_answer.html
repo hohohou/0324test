@@ -136,6 +136,14 @@
                 <td class="head">내용</td>
                 <td><input type="text" class="detail" readonly th:value="${dto.content}"></td>
             </tr>
+            <tr>
+                <td>첨부파일</td>
+                <td>
+                <p th:each="file : ${fList}">
+                <img th:if="${file.type == 'image' }" th:src="@{/filedown(inquiryNum=${file.inquiryNum },fileNum=${file.fileNum})}">
+                </p>
+</td>
+            </tr>
         </table>
         <hr>
         
