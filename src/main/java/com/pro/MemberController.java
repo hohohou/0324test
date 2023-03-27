@@ -84,7 +84,7 @@ public class MemberController {
 	@RequestMapping("/member/update/view")
 	public String memberUpdateView() {
 		
-		return "check_main";
+		return "change_main";
 	}
 	
 	
