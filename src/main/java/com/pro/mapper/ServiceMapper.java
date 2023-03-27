@@ -38,5 +38,9 @@ public interface ServiceMapper {
 
 	int insertFile(FileDTO fileDTO);
 
+	int selectImageFileNum();
+
+	
+
 
 }

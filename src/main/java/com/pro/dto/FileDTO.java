@@ -14,6 +14,8 @@ public class FileDTO {
 	public FileDTO() {}
 
 	public FileDTO(File file, int inquiryNum, int fileNum) {
+		this.path = file.getAbsolutePath();
+		this.fileName = file.getName();
 		this.inquiryNum = inquiryNum;
 		this.fileNum = fileNum;
 		switch (fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase()) {
@@ -26,8 +28,6 @@ public class FileDTO {
 		default:
 			this.type = "normal";
 		}
-		this.path = file.getAbsolutePath();
-		this.fileName = file.getName();
 
 	}
 

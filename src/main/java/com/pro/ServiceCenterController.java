@@ -4,10 +4,15 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -64,9 +69,32 @@ public class ServiceCenterController {
 		}
 
 	}
+	
+//	@RequestMapping("/fileupload")
+//	public ResponseEntity<String> fileUpload(@RequestParam(value = "upload") MultipartFile file,HttpServletRequest request, HttpServletResponse response, HttpSession session){
+//		String originFileName = file.getOriginalFilename();
+//		String root = "c:\\fileupload\\";
+//		MemberDTO dto = (MemberDTO) session.getAttribute("dto");
+//		String fileName = dto.getEmail() + originFileName.substring(originFileName.lastIndexOf('.'));
+//		File savefile = new File(root + fileName);
+//		int fileNum = serviceService.uploadImage(savefile.getAbsolutePath());
+//		HashMap<String, Object> map = new HashMap<String, Object>();
+//		try {
+//		file.transferTo(savefile);
+//		map.put("uploaded", true);
+//		map.put("url", "/image/"+fileNum);
+//		map.put("bi_no", fileNum);
+//		}catch (IOException e) {
+//			map.put("uploaded", false);
+//			map.put("message", "파일 업로드 중 에러 발생");
+//		}
+//		
+//		
+//		return new ResponseEntity(map, HttpStatus.OK);
+//	}
 
 	@RequestMapping("/inquiry/add")
-	public void InquiryWrite(InquiryDTO dto, @RequestParam("file") MultipartFile[] file) {
+	public String InquiryWrite(InquiryDTO dto, @RequestParam("file") MultipartFile[] file) {
 		int inquiryNum = serviceService.insertInquiry(dto);
 
 		String root = "c://fileupload";		
@@ -85,6 +113,8 @@ public class ServiceCenterController {
 				e.printStackTrace();
 			}
 		}
+		
+		return "redirect:/inquiry/list";
 	}
 
 	@RequestMapping("/inquiry/answer/{inquiryNum}")
