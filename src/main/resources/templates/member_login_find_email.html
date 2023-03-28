@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+	<title>이메일 찾기</title>
+</head>
+<style>
+	body {
+		margin: 0;
+		padding: 0;
+		font-family: sans-serif;
+		background-color: black;
+	}
+
+	.login-box {
+		width: 400px;
+		height: 640px;
+		background: #fff;
+		/* color: #000; */
+		top: 50%;
+		left: 50%;
+		position: absolute;
+		transform: translate(-50%, -50%);
+		box-sizing: border-box;
+		padding: 70px 30px;
+	}
+
+	h1 {
+		margin: 0;
+		padding: 0 0 35px;
+		text-align: center;
+		font-size: 28px;
+	}
+
+	label {
+		margin: 0;
+		padding: 0;
+		font-weight: bold;
+		display: block;
+	}
+
+	input[type="text"],
+	input[type="phone_number"] {
+		width: 100%;
+		margin-bottom: 20px;
+		/* padding: 10px; */
+		border: none;
+		border-bottom: 1px solid #000;
+		background-color: transparent;
+		outline: none;
+	}
+
+	input[type="submit"] {
+		width: 340px;
+		height: 40px;
+		font-size: 18px;
+		outline: none;
+		border-radius: 5px;
+		box-sizing: border-box;
+		margin-bottom: 5px;
+		border: 1px solid gray;
+	}
+
+	input[type="submit"]:hover {
+		cursor: pointer;
+		background: #3b3b3b;
+		color: #fff;
+	}
+
+	.login button {
+		width: 340px;
+		height: 40px;
+		font-size: 18px;
+		outline: none;
+		border-radius: 5px;
+		box-sizing: border-box;
+		margin-bottom: 5px;
+		border: 1px solid gray;
+	}
+
+	form a {
+		text-decoration: none;
+		float: right;
+
+	}
+
+	.a {
+		margin-left: 10px;
+	}
+
+	.login {
+		margin-top: 30px;
+
+	}
+
+	.login a input {
+		margin-top: 3px;
+
+	}
+
+	.login-box form .login_bu {
+		margin-bottom: 30px;
+	}
+
+	.login-box img {
+		width: 96px;
+		height: 48px;
+		display: block;
+		margin: auto;
+		margin-bottom: 30px;
+		border: 1px solid gray;
+	}
+</style>
+<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+	crossorigin="anonymous"></script>
+
+<script>
+	$(function () {
+			
+		});
+
+</script>
+
+<body>
+	<div class="login-box">
+		<img src="img/logo.png" alt="">
+		<h1>이메일 찾기</h1>
+		<form>
+			<input type="text" id="email" name="email" placeholder="이름을 입력하세요." required>
+			<input type="text" id="phone_number" name="phone_number" placeholder="휴대전화 번호를 입력하세요." required>
+			<input class="login_bu" type="submit" value="인증하기"> <hr>
+			<p>휴대전화 인증 : 만14세 미만의...........<br> 뼈 끝에 스며들어 가는 열락의 소리다이것은 피어나기 전인 유소년에게서 구하지 못할 바이며 시들어 가는 노년에게서 구하지 못할 바이며 오직 우리 청춘에서만 구할 수 있는 것이다 청춘은 인생의 황금시대다 우리는 이 황금시대의 가치를</p>
+		</form>
+	</div>
+</body>
+</html>

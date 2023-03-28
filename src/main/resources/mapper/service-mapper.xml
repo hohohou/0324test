@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pro.mapper.ServiceMapper">
+	
 
 	<select id="selectInquiryNum" resultType="int">
 		select
@@ -11,7 +12,8 @@
 	<insert id="insertInquiry" parameterType="inquiry">
 		insert into
 		inquiry(inquirynum, type, email, title, content)
-		values(#{inquiryNum}, #{type}, #{email},#{title},#{content})
+		values(#{inquiryNum},
+		#{type}, #{email},#{title},#{content})
 	</insert>
 	<select id="selectAllInquiry" parameterType="String"
 		resultType="inquiry">
@@ -53,15 +55,31 @@
 		update inquiry
 		set status = 1 where inquirynum = #{inquiryNum}
 	</update>
-	<select id="inquiryAdminSort" parameterType="hashMap" resultType="inquiry">
-		select * from inquiry where type = #{type} and status = #{answer}
+	<select id="inquiryAdminSort" parameterType="hashMap"
+		resultType="inquiry">
+		select * from inquiry where type = #{type} and status =
+		#{answer}
 	</select>
 	<insert id="insertFile" parameterType="file">
-		insert into inquiry_file values(#{inquiryNum},(select nvl(max(file_num),0) from inquiry_file where inquiry_num = #{inquiryNum})+1 ,#{path})
+		insert into inquiry_file
+		values((SELECT nvl(max(file_num),0) FROM inquiry_file WHERE
+		inquirynum = #{inquiryNum}) + 1,#{inquiryNum},#{path})
 	</insert>
-	<select id="selectFileList" parameterType="int" resultType="file">
-		select * from inquiry_file where inquiry_num = #{inquiryNum}
+	<select id="selectFileList" parameterType="int"
+		resultType="file">
+		select * from inquiry_file where inquirynum =
+		#{inquiryNum}
 	</select>
-	
-	
+	<select id="selectImageFile" parameterType="int"
+		resultType="file">
+		select * from inquiry_file where filenum = #{fileNum}
+	</select>
+	<select id="selectFile" parameterType="hashMap"
+		resultType="file">
+		select * from inquiry_file where inquirynum =
+		#{inquiryNum} and filenum = #{fileNum}
+	</select>
+
+
+
 </mapper>

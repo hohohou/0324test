@@ -73,6 +73,23 @@ public class ServiceCenterService {
 		
 		return serviceMapper.selectFileList(inquiryNum);
 	}
+	public int uploadImage(String absolutePath) {
+		int fileNum = serviceMapper.selectImageFileNum();
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("fileNum", fileNum);
+		map.put("path", absolutePath);
+		serviceMapper.insertBoardImage(map);
+		return fileNum;
+
+		
+		
+	}
+	public FileDTO selectFile(int inquiryNum, int fileNum) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("inquiryNum", inquiryNum);
+		map.put("fileNum,", fileNum);
+		return serviceMapper.selectFile(map);
+	}
 	
 	
 	

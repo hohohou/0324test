@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+	<title>이메일 찾기</title>
+</head>
+<style>
+	body {
+		margin: 0;
+		padding: 0;
+		font-family: sans-serif;
+		background-color: black;
+	}
+
+	.login-box {
+		width: 400px;
+		height: 640px;
+		background: #fff;
+		/* color: #000; */
+		top: 50%;
+		left: 50%;
+		position: absolute;
+		transform: translate(-50%, -50%);
+		box-sizing: border-box;
+		padding: 70px 30px;
+	}
+
+	h1 {
+		margin: 0;
+		padding: 0 0 35px;
+		text-align: center;
+		font-size: 28px;
+	}
+
+	label {
+		margin: 0;
+		padding: 0;
+		font-weight: bold;
+		display: block;
+	}
+
+	input[type="submit"] {
+		width: 340px;
+		height: 40px;
+		font-size: 18px;
+		outline: none;
+		border-radius: 5px;
+		box-sizing: border-box;
+		margin-bottom: 5px;
+		border: 1px solid gray;
+	}
+
+	input[type="submit"]:hover {
+		cursor: pointer;
+		background: #3b3b3b;
+		color: #fff;
+	}
+
+
+
+	form a {
+		text-decoration: none;
+		float: right;
+
+	}
+
+	.a {
+		margin-left: 10px;
+	}
+
+	.login {
+		margin-top: 30px;
+
+	}
+
+	.login a input {
+		margin-top: 3px;
+
+	}
+
+	.login-box form .login_bu {
+		margin-bottom: 30px;
+	}
+
+	.login-box img {
+		width: 96px;
+		height: 48px;
+		display: block;
+		margin: auto;
+		margin-bottom: 30px;
+		border: 1px solid gray;
+	}
+	p{
+		text-align: center;
+		margin-bottom: 20px;
+	}
+	li{
+		list-style: none;
+		text-align: center;
+		margin-top: 25px;
+		margin-bottom: 40px;
+		font-size: 18px;
+		font-weight: bold;
+	}
+</style>
+<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+	crossorigin="anonymous"></script>
+
+<script>
+	$(function () {
+			
+		});
+
+</script>
+
+<body>
+	<div class="login-box">
+		<img src="../img/logo.png" alt="">
+		<h1>이메일 찾기</h1>
+		<form>
+			<p>가입된 이메일</p>
+			<li>가입된 이메일 나오는 곳</li>
+			<input class="login_bu" type="submit" value="메인으로 돌아가기">
+			
+		</form>
+	</div>
+</body>
+</html>

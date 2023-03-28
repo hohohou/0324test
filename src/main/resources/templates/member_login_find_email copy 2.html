@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>이메일 찾기</title>
+</head>
+<style>
+	body {
+		margin: 0;
+		padding: 0;
+		font-family: sans-serif;
+		background-color: black;
+	}
+
+	.login-box {
+		width: 400px;
+		height: 640px;
+		background: #fff;
+		/* color: #000; */
+		top: 50%;
+		left: 50%;
+		position: absolute;
+		transform: translate(-50%, -50%);
+		box-sizing: border-box;
+		padding: 70px 30px;
+	}
+
+	h1 {
+		margin: 0;
+		padding: 0 0 35px;
+		text-align: center;
+		font-size: 28px;
+	}
+
+	label {
+		margin: 0;
+		padding: 0;
+		font-weight: bold;
+		display: block;
+	}
+
+	input[type="submit"] {
+		width: 340px;
+		height: 40px;
+		font-size: 18px;
+		outline: none;
+		border-radius: 5px;
+		box-sizing: border-box;
+		margin-bottom: 5px;
+		border: 1px solid gray;
+	}
+
+	input[type="submit"]:hover {
+		cursor: pointer;
+		background: #3b3b3b;
+		color: #fff;
+	}
+
+
+
+	form a {
+		text-decoration: none;
+		float: right;
+
+	}
+
+	.a {
+		margin-left: 10px;
+	}
+
+	.login {
+		margin-top: 30px;
+
+	}
+
+	.login a input {
+		margin-top: 3px;
+
+	}
+
+	.login-box form .login_bu {
+		margin-top: 100px;
+	}
+
+	.login-box img {
+		width: 96px;
+		height: 48px;
+		display: block;
+		margin: auto;
+		margin-bottom: 30px;
+		border: 1px solid gray;
+	}
+
+	input[type="text"] {
+		width: 100%;
+		margin-bottom: 20px;
+		/* padding: 10px; */
+		border: none;
+		border-bottom: 1px solid #000;
+		background-color: transparent;
+		outline: none;
+		text-align: center;
+	}
+</style>
+<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+	crossorigin="anonymous"></script>
+<script>
+	function sub() {
+		alert('이메일로 임시 비밀번호를 보냈어요. 메일을 확인해 주세요. 만약 메일이 보이지 않는다면 스펨함을 확인해 보세요');
+	}
+</script>
+
+<body>
+	<div class="login-box">
+		<img src="../img/logo.png" alt="">
+		<h1>이메일 찾기</h1>
+		<form>
+			<input type="text" id="email" name="email" placeholder="이메일을 입력하세요." required>
+			<input class="login_bu" type="submit" value="재설정 메일 보내기" onclick="javascript:sub()">
+		</form>
+	</div>
+</body>
+
+</html>

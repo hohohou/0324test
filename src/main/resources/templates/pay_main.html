@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>결제</title>
+    
+  </head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
+    let paytype = "kakaopay";
+    function closed() {
+      console.log("closed!");
+    }
+
+    function pay() {
+      console.log(`selected ${paytype}`);
+    }
+
+    function showpopup() {
+      document.getElementById("background-div").style.display = "block";
+      document.getElementById("options").style.display = "block";
+    }
+
+    function hidepopup() {
+      document.getElementById("background-div").style.display = "none";
+      document.getElementById("options").style.display = "none";
+    }
+
+    function clickpaytype(type) {
+      paytype = type;
+      let kakaopayradio = document.getElementById("kakaopay");
+      let cardradio = document.getElementById("card");
+      let phoneradio = document.getElementById("phone");
+      if (paytype == "kakaopay") {
+        kakaopayradio.src = "./icons/radio-active.svg";
+        cardradio.src = "./icons/radio.svg";
+        phoneradio.src = "./icons/radio.svg";
+      } else if (paytype == "card") {
+        kakaopayradio.src = "./icons/radio.svg";
+        cardradio.src = "./icons/radio-active.svg";
+        phoneradio.src = "./icons/radio.svg";
+      } else if (paytype == "phone") {
+        kakaopayradio.src = "./icons/radio.svg";
+        cardradio.src = "./icons/radio.svg";
+        phoneradio.src = "./icons/radio-active.svg";
+      }
+    }
+  </script>
+<!-- <script type="text/javascript">
+    $(document).ready(function(){
+
+        $("#nextBtn").click(function(){    
+            if($("#check").is(":checked") == false){
+                alert("약관에 동의 하셔야 다음 단계로 진행이 가능해요. 체크해 주세요.");
+                return;
+            }else{
+                $("#info_4").submit();
+            }
+        });    
+    });
+</script> -->
+<style>
+body {
+    margin: 0;
+  }
+  
+  #background-div {
+    display: none;
+    position: fixed;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 375px;
+    height: 100%;
+    background-color: rgba(4, 4, 15, 0.4);
+    z-index: 2;
+  }
+  
+  #content {
+    background-color: #fff;
+    width: 100%;
+    max-width: 375px;
+    padding-top: 20px;
+    border: 1px solid #eee;
+    position: relative;
+    z-index: 1;
+  }
+  
+  #content header {
+    width: 100%;
+    height: 32px;
+    display: block;
+  }
+  #content header img {
+    float: right;
+    margin-right: 16px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  #content h1 {
+    font-size: 24px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-align: center;
+    color: #282a35;
+    margin: 0;
+    margin-bottom: 8px;
+  }
+  
+  #content h1 + p {
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-align: center;
+    color: #282a35;
+    margin-bottom: 40px;
+  }
+  
+  #content div {
+    height: 48px;
+    width: 100%;
+    position: relative;
+    padding: 0 32px;
+    box-sizing: border-box;
+    margin-bottom: 32px;
+  }
+  #content div p {
+    height: 24px;
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    color: #282a35;
+    margin: 0;
+  }
+  #content div button {
+    width: 120px;
+    height: 48px;
+    border-radius: 4px;
+    background-color: #816bff;
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-align: center;
+    color: #ffffff;
+    position: absolute;
+    right: 32px;
+    top: 0;
+    outline: none;
+  }
+  
+  #information {
+    background-color: #eee;
+    padding: 16px;
+    box-sizing: border-box;
+    z-index: 1;
+  }
+  #information p {
+    font-size: 12px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    color: #6a6c78;
+    margin: 0;
+  }
+  #information p:nth-child(2n) {
+    margin-bottom: 16px;
+  }
+  #information p:nth-child(2n + 1) {
+    margin-bottom: 4px;
+  }
+  
+  #options {
+    display: none;
+    width: 100%;
+    max-width: 375px;
+    padding: 16px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    background-color: #ffffff;
+    position: fixed;
+    bottom: 0;
+    z-index: 3;
+  }
+  #options h1 {
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    color: #6a6c78;
+  }
+  #options div {
+    height: 58px;
+    border-top: 1px solid #e0e0e0;
+    line-height: 58px;
+  }
+  
+  #options img {
+    vertical-align: middle;
+  }
+  
+  #choose-btn {
+    width: 96px;
+    height: 48px;
+    border-radius: 4px;
+    background-color: #816bff;
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-align: center;
+    color: #ffffff;
+    float: right;
+    cursor: pointer;
+    outline: none;
+  }
+</style>
+<body>
+    <div id="background-div" onclick="hidepopup()"></div>
+    <section id="content">
+      <header>
+        <img src="./icons/exit.svg" alt="exit" onclick="closed()" />
+      </header>
+      <h1>멤버십</h1>
+      <p>
+        동시 방영 신작부터 역대 인기 애니까지 <br/>
+        멤버십으로 편하게 즐기세요!
+      </p>
+      <div>
+        <p>1개월 (정기결제)</p>
+        <p>월 9,900원</p>
+        <button id="buy-btn" onclick="showpopup()">구매</button>
+      </div>
+      <section id="information">
+        <p>구매 안내</p>
+        <p>
+          - 멤버십은 구매한 시점부터 바로 적용됩니다. <br />
+          - 매월 결제 예정일에 자동으로 결제가 됩니다. <br />
+          - 멤버십은 언제든 해지 가능합니다. 해지하셔도 결제 만료일까지 사용
+          가능합니다. <br />- 멤버십 5일 무료 체험 중 구매 혹은 친구초대로 무료
+          추가일을 획득한 경우, 추가일을 더하여 다음 결제일에 반영됩니다.
+        </p>
+        <p>이용 안내</p>
+        <p>
+          - 영상은 스트리밍으로 제공되며 해외 이용은 불가합니다. <br />
+          - 멤버십에는 청소년 관람불가 작품이 일부 포함되어 있습니다. <br />
+          - 저작권자의 요청에 따라 멤버십에 제외되는 작품이 있을 수 있습니다.
+          <br />- 멤버십 구매 시 회원등급이 적용되어 앱 내 다운로드 등의 혜택을
+          이용하실 수 있습니다.
+        </p>
+        <p>환불 안내</p>
+        <p>
+          - 환불은 멤버십 해당 작품을 재생하지 않은 경우 7일 이내 가능합니다.
+          <br />- 1개월(정기결제) 사용 중 해지하는 경우 남은 기간에 대한 금액은
+          환불되지 않습니다.
+        </p>
+        <p>문의 안내</p>
+        <p>
+          - 기타 문의 사항은 더보기 메뉴의 고객센터로 들어오셔서 1:1문의하기로
+          연락주시면 감사드리겠습니다.
+        </p>
+      </section>
+    </section>
+    <section id="options">
+      <h1>구매방법선택</h1>
+      <div onclick="clickpaytype('kakaopay')">
+        <img src="./icons/radio-active.svg" alt="radio" id="kakaopay" />
+        <span>카카오페이</span>
+      </div>
+      <div onclick="clickpaytype('card')">
+        <img src="./icons/radio.svg" alt="radio" id="card" />
+        <span>신용/체크 카드</span>
+      </div>
+      <div onclick="clickpaytype('phone')">
+        <img src="./icons/radio.svg" alt="radio" id="phone" />
+        <span>휴대폰 결제</span>
+      </div>
+      <button id="choose-btn" onclick="pay()">결제</button>
+    </section>
+  </body>
+</html>
+</html>

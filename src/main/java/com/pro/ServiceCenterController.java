@@ -1,6 +1,8 @@
 package com.pro;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -71,34 +73,72 @@ public class ServiceCenterController {
 
 	}
 	
-//	@RequestMapping("/fileupload")
-//	public ResponseEntity<String> fileUpload(@RequestParam(value = "upload") MultipartFile file,HttpServletRequest request, HttpServletResponse response, HttpSession session){
-//		String originFileName = file.getOriginalFilename();
-//		String root = "c:\\fileupload\\";
-//		MemberDTO dto = (MemberDTO) session.getAttribute("dto");
-//		String fileName = dto.getEmail() + originFileName.substring(originFileName.lastIndexOf('.'));
-//		File savefile = new File(root + fileName);
-//		int fileNum = serviceService.uploadImage(savefile.getAbsolutePath());
-//		HashMap<String, Object> map = new HashMap<String, Object>();
-//		try {
-//		file.transferTo(savefile);
-//		map.put("uploaded", true);
-//		map.put("url", "/image/"+fileNum);
-//		map.put("bi_no", fileNum);
-//		}catch (IOException e) {
-//			map.put("uploaded", false);
-//			map.put("message", "파일 업로드 중 에러 발생");
-//		}
-//		
-//		
-//		return new ResponseEntity(map, HttpStatus.OK);
-//	}
+	@RequestMapping("/inquiry/answer/{inquiryNum}")
+	public ModelAndView inquriyView(@PathVariable("inquiryNum") int inquiryNum) {
+		ModelAndView view = new ModelAndView();
+		InquiryDTO dto = serviceService.selectInquiry(inquiryNum);
+		InquiryAnswerDTO adto = serviceService.selectInquiryAnswer(inquiryNum);
+		List<FileDTO> flist = serviceService.selectFileList(inquiryNum);
+		System.out.println(flist.toString());
+		view.addObject("adto", adto);
+		view.addObject("dto", dto);
+		view.addObject("flist", flist);
+		view.setViewName("service_center_inquiry_answer");
+
+		return view;
+
+	}
+	
+	@RequestMapping("/filedown")
+	public void fileDownload(int inquiryNum, int fileNum, HttpServletResponse response) {
+		FileDTO dto = serviceService.selectFile(inquiryNum, fileNum);
+		try(BufferedOutputStream bos = 
+				new BufferedOutputStream(response.getOutputStream());
+				FileInputStream fis = new FileInputStream(dto.getPath())){
+			byte[] buffer = new byte[1024*1024];
+			
+			while(true) {
+				int count = fis.read(buffer);
+				if(count == -1) break;
+				bos.write(buffer,0,count);
+				bos.flush();
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+                                         
+	}
+
+
+	
+	@RequestMapping("/fileupload")
+	public ResponseEntity<String> fileUpload(@RequestParam(value = "upload") MultipartFile file,HttpServletRequest request, HttpServletResponse response, HttpSession session){
+		String originFileName = file.getOriginalFilename();
+		String root = "c:\\fileupload\\";
+		MemberDTO dto = (MemberDTO) session.getAttribute("dto");
+		String fileName = dto.getEmail() + originFileName.substring(originFileName.lastIndexOf('.'));
+		File savefile = new File(root + fileName);
+		int fileNum = serviceService.uploadImage(savefile.getAbsolutePath());
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		try {
+		file.transferTo(savefile);
+		map.put("uploaded", true);
+		map.put("url", "/image/"+fileNum);
+		map.put("bi_no", fileNum);
+		}catch (IOException e) {
+			map.put("uploaded", false);
+			map.put("message", "파일 업로드 중 에러 발생");
+		}
+		
+		
+		return new ResponseEntity(map, HttpStatus.OK);
+	}
 
 	@RequestMapping("/inquiry/add")
 	public String InquiryWrite(InquiryDTO dto, @RequestParam("file") MultipartFile[] file) {
 		int inquiryNum = serviceService.insertInquiry(dto);
 
-		String root = "c://fileupload";		
+		String root = "c:\\fileupload\\";		
 		for (int i = 0; i < file.length; i++) {
 			if (file[i].getSize() == 0)
 				continue;
@@ -107,7 +147,7 @@ public class ServiceCenterController {
 			try {
 				File saveFile = new File(root + fileName);
 				file[i].transferTo(saveFile);
-				serviceService.insertFile(new FileDTO(saveFile, inquiryNum, i));
+				serviceService.insertFile(new FileDTO(saveFile, inquiryNum, i + 1));
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -118,20 +158,7 @@ public class ServiceCenterController {
 		return "redirect:/inquiry/list";
 	}
 
-	@RequestMapping("/inquiry/answer/{inquiryNum}")
-	public ModelAndView inquriyView(@PathVariable("inquiryNum") int inquiryNum) {
-		ModelAndView view = new ModelAndView();
-		InquiryDTO dto = serviceService.selectInquiry(inquiryNum);
-		InquiryAnswerDTO adto = serviceService.selectInquiryAnswer(inquiryNum);
-		List<FileDTO> flist = serviceService.selectFileList(inquiryNum);
-		view.addObject("adto", adto);
-		view.addObject("dto", dto);
-		view.addObject("flist", flist);
-		view.setViewName("service_center_inquiry_answer");
-
-		return view;
-
-	}
+	
 
 	@RequestMapping("/inquiry/delete/{inquiryNum}")
 	public String inquiryDelete(@PathVariable(name = "inquiryNum") int inquiryNum) {

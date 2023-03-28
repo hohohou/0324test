@@ -42,5 +42,9 @@ public interface ServiceMapper {
 
 	List<FileDTO> selectFileList(int inquiryNum);
 
+	void insertBoardImage(HashMap<String, Object> map);
+
+	FileDTO selectFile(HashMap<String, Object> map);
+
 
 }

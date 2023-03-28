@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 헤더</title>
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+</style>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        font-family: 'Jua', sans-serif;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    .header {
+
+        width: 100%;
+        height: 50px;
+        padding: 0px 30px;
+        display: flex;
+        flex-direction: row;
+        position: fixed;
+        background-color: white;
+    }
+
+    ul {
+        list-style-type: none;
+    }
+
+    .header ul {
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .header ul>li {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        margin-left: 30px;
+    }
+
+    .logo {
+        width: 80px;
+        height: 100%;
+        padding-top: 10px;
+    }
+
+    .menu {
+        display: flex;
+    }
+
+/*     .search_bar {
+        position: absolute;
+        right: 200px;
+        margin-top: 10px;
+        width: 200px;
+        height: 30px;
+    } */
+
+    .login {
+        position: absolute;
+        right: 100px;
+        margin-top: 17px;
+
+    }
+
+    .search_img {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        top: 17px;
+        right: 410px;
+    }
+
+    main {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
+
+    .btn_modify {
+        background-color: cornflowerblue;
+        width: 100px;
+		height: 50px;   
+        outline: none;
+		border-radius: 5px;
+		box-sizing: border-box;
+    }
+    .btn_del{
+        background-color: gray;
+        width: 100px;
+		height: 50px;   
+        outline: none;
+		border-radius: 5px;
+		box-sizing: border-box;
+    }
+    .container{
+        margin-top: 50px;
+    }
+    .table{
+        text-align: center;
+        
+    }
+    .vi_menu{
+        width: 300px;
+        height: 600px;
+
+    }
+    .vi_menu input{
+        width: 350px;
+        height: 40px;
+    }
+
+</style>
+<script src="https://code.jquery.com/jquery-3.6.3.js"
+integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+<script>
+    $(function(){
+
+    });
+</script>
+
+<body>
+    <!--헤데부분-->
+    <div class="header">
+        <div class="logo"><img src="img/logo.png"></div>
+        <div class="menu">
+            <ul>
+                <li><a href="#">계정관리</a></li>
+                <li><a href="/aaa/week/all_content.html">태그관리</a></li>
+                <li><a href="#">영상/댓글관리</a></li>
+                <li><a href="#">문의관리</a></li>
+                <li><a href="#">공지관리</a></li>
+            </ul>
+            <!-- <img src="img/search.png" class="search_img">
+            <input type="text" class="search_bar" placeholder="제목,제작사,감독으로 검색(초성)"> -->
+        </div>
+        <div class="login">
+            <a href="#">로그인/가입</a>
+        </div>
+    </div>
+
+    <!--메인 페이지 내용-->
+    
+    <div class="container">
+        <video src="./vid/glk-1406.mp4" width="1280px" height="720px" poster="images/" controls></video>
+        <div class="vi_menu">
+            <h2>제목</h2>
+            <input type="text" name="" id="" placeholder="제목을 입력하세요.">
+            <h2>소제목</h2>
+            <input type="text" name="" id="" placeholder="소제목을 입력하세요.">
+            <h2>태그</h2>
+            <input type="text" name="" id="" placeholder="태그을 입력하세요.">
+            <h2>장르</h2>
+            <input type="text" name="" id="" placeholder="장르을 입력하세요.">
+            <h2>방영일</h2>
+            <input type="text" name="" id="" placeholder="YYYY-MM-DD">
+            <h2>제작사</h2>
+            <input type="text" name="" id="" placeholder="제목을 입력하세요.">
+        </div>
+
+        
+    
+    
+    
+    </div>
+    <!--footer 영역-->
+    <footer>
+        <nav>
+            <img src="/img/logo.png" alt="">
+            <a href='#' target='_blank'>회사소개</a> | 
+            <a href='#' target='_blank'>인재채용</a> | 
+            <a href='#' target='_blank'>이용약관</a> | 
+            <a href='#' target='_blank'>청소년보호정책</a> | 
+            <a href='#' target='_blank'>고객센터</a> | 
+            <a href='#' target='_blank'>개인정보처리방침</a>
+        </nav>
+        <p>
+            <span>상호: 주식회사 XXXX</span><br/>
+            <span>대표: XXX</span><br/>
+            <span>주소: 서울특별시 마포구 XXXX 00, 00층 XXX호(XX동)</span><br/>
+            <span>사업자등록번호 : 000-00-00000</span><br/>
+            <span>통신판매번호 : 제 2022-서울마포-XXXX호</span><br/>
+            <span>이메일 : aaaaa@gmail.com</span><br/>
+            <span>대표전화 : 1234-5678</span>
+        </p>
+        <div class="img">
+            <nav>
+                <a href='https://youtube.com/' target='_blank'><img src="/img/logo.png" alt=""></a>
+                <a href='https://youtube.com/' target='_blank'><img src="/img/logo.png" alt=""></a>
+                <a href='https://youtube.com/' target='_blank'><img src="/img/logo.png" alt=""></a>
+            </nav>
+        </div>
+    </footer>
+
+</body>
+</html>
