@@ -90,6 +90,10 @@ public class ServiceCenterService {
 		map.put("fileNum,", fileNum);
 		return serviceMapper.selectFile(map);
 	}
+	public FileDTO selectImageFile(int fileNum) {
+		
+		return serviceMapper.selectImageFile(fileNum);
+	}
 	
 	
 	

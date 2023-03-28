@@ -46,5 +46,7 @@ public interface ServiceMapper {
 
 	FileDTO selectFile(HashMap<String, Object> map);
 
+	FileDTO selectImageFile(int fileNum);
+
 
 }

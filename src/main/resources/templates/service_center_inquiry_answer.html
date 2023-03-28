@@ -142,6 +142,7 @@
                 <td>
                     <p th:each="file : ${flist}" >
                        <img th:if="${file.type == 'image' }" th:src="@{/filedown(inquiryNum=${file.inquiryNum},fileNum=${file.fileNum})}" style="width:500px;">
+                       <img src="c:\\fileupload\\0.jpg">
 					</p>
 
                     </p>

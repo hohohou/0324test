@@ -4,6 +4,8 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -38,8 +40,9 @@ public class ServiceCenterController {
 		this.serviceService = serviceService;
 	}
 
-	@RequestMapping("")
-	public String main() {
+	@RequestMapping("/service/main/view")
+	public String serviceMain() {
+		
 		return "service_center_main";
 	}
 
@@ -72,7 +75,7 @@ public class ServiceCenterController {
 		}
 
 	}
-	
+
 	@RequestMapping("/inquiry/answer/{inquiryNum}")
 	public ModelAndView inquriyView(@PathVariable("inquiryNum") int inquiryNum) {
 		ModelAndView view = new ModelAndView();
@@ -88,7 +91,7 @@ public class ServiceCenterController {
 		return view;
 
 	}
-	
+
 	@RequestMapping("/filedown")
 	public void fileDownload(int inquiryNum, int fileNum, HttpServletResponse response) {
 		FileDTO dto = serviceService.selectFile(inquiryNum, fileNum);
@@ -106,39 +109,66 @@ public class ServiceCenterController {
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-                                         
 	}
 
 
-	
 	@RequestMapping("/fileupload")
-	public ResponseEntity<String> fileUpload(@RequestParam(value = "upload") MultipartFile file,HttpServletRequest request, HttpServletResponse response, HttpSession session){
+	public ResponseEntity<String> fileUpload(@RequestParam(value = "upload") MultipartFile file,
+			HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		String originFileName = file.getOriginalFilename();
 		String root = "c:\\fileupload\\";
 		MemberDTO dto = (MemberDTO) session.getAttribute("dto");
 		String fileName = dto.getEmail() + originFileName.substring(originFileName.lastIndexOf('.'));
 		File savefile = new File(root + fileName);
-		int fileNum = serviceService.uploadImage(savefile.getAbsolutePath());
+		int fno = serviceService.uploadImage(savefile.getAbsolutePath());
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		try {
-		file.transferTo(savefile);
-		map.put("uploaded", true);
-		map.put("url", "/image/"+fileNum);
-		map.put("bi_no", fileNum);
-		}catch (IOException e) {
+			file.transferTo(savefile);
+			map.put("uploaded", true);
+			map.put("url", "/image/" + fno);
+			map.put("bi_no", fno);
+
+		} catch (IOException e) {
 			map.put("uploaded", false);
 			map.put("message", "파일 업로드 중 에러 발생");
 		}
-		
-		
 		return new ResponseEntity(map, HttpStatus.OK);
+	}
+
+	@RequestMapping("/image/{fileNum}")
+	public void imageDown(@PathVariable("fno") int fileNum, HttpServletResponse response) {
+		FileDTO dto = serviceService.selectImageFile(fileNum);
+		String path = dto.getPath();
+		File file = new File(path);
+		String fileName = dto.getFileName();
+		try {
+			fileName = URLEncoder.encode(fileName, "utf-8");
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		}
+		response.setHeader("Content-Disposition", "attachement;fileName=" + fileName);
+		response.setHeader("Content-Transfer-Encoding", "binary");
+		response.setContentLength((int) file.length());
+		try (FileInputStream fis = new FileInputStream(file);
+				BufferedOutputStream bos = new BufferedOutputStream(response.getOutputStream());) {
+			byte[] buffer = new byte[1024 * 1024];
+			while (true) {
+				int size = fis.read(buffer);
+				if (size == -1)
+					break;
+				bos.write(buffer, 0, size);
+				bos.flush();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@RequestMapping("/inquiry/add")
 	public String InquiryWrite(InquiryDTO dto, @RequestParam("file") MultipartFile[] file) {
 		int inquiryNum = serviceService.insertInquiry(dto);
 
-		String root = "c:\\fileupload\\";		
+		String root = "c:\\fileupload\\";
 		for (int i = 0; i < file.length; i++) {
 			if (file[i].getSize() == 0)
 				continue;
@@ -154,11 +184,9 @@ public class ServiceCenterController {
 				e.printStackTrace();
 			}
 		}
-		
+
 		return "redirect:/inquiry/list";
 	}
-
-	
 
 	@RequestMapping("/inquiry/delete/{inquiryNum}")
 	public String inquiryDelete(@PathVariable(name = "inquiryNum") int inquiryNum) {
