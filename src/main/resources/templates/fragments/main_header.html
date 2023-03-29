@@ -115,7 +115,7 @@
         <div class="login">
             <a th:if="${session.dto == null} and ${session.addto == null}" href="/login/view">로그인/가입</a>
             
-            <a th:if="${session.dto != null}" href="/inventory">[[${session.dto.nick}]]</a>
+            <a th:if="${session.dto != null}" href="/inventory/view">[[${session.dto.nick}]]</a>
             <a th:if="${session.dto != null}" href="/member/check/view"> &nbsp;&nbsp;&nbsp; 내정보 변경</a>
             <a th:if="${session.dto != null}" href="/logout"> &nbsp;&nbsp;&nbsp; 로그아웃</a>
             <a th:if="${session.addto != null}" href="/inventory">[[${session.addto.id}]]</a>

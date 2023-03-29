@@ -17,7 +17,7 @@ public class MainController {
 	@RequestMapping("/week/content/view")
 	public String weekContentView() {
 		
-		return "day_content";
+		return "all_content";
 	}
 	@RequestMapping("/recommend/theme/view")
 	public String recommentThemeView() {
@@ -29,5 +29,5 @@ public class MainController {
 		
 		return "";
 	}
-
+	
 }

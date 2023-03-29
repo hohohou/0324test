@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -128,27 +128,7 @@
 </head>
 
 <body>
-    <div class="header">
-       
-            <div class="logo"><img src="img/logo.png"></div>
-            <div class="menu">
-                <ul>
-                    <li><a href="#">태그검색</a></li>
-                    <li><a href="#">요일별 작품</a></li>
-                    <li><a href="#">테마검색</a></li>
-                    <li><a href="#">멤버쉽</a></li>
-                    
-                </ul>
-                <img src="img/search.png" class="search_img">
-                <input type="text" class="search_bar" placeholder="제목,제작사,감독으로 검색(초성)">
-            </div>
-
-      
-
-        <div class="login">
-            <a href="#">로그인/가입</a>
-        </div>
-
+    <th:block th:include="fragments/main_header" ></th:block>
         
 
     </div>
@@ -156,14 +136,14 @@
         <h2>요일별 신작</h2>
         <p>[공지] 극장판 전생했더니 슬라임이었던 건 이벤트 당첨자 경품 수령 안내</p>
         <div class="week">
-        <div class="choice">요일 전체</div>
-        <div class="choice">월요 작품</div>
-        <div class="choice">화요 작품</div>
-        <div class="choice">수요 작품</div>
-        <div class="choice">목요 작품</div>
-        <div class="choice">금요 작품</div>
-        <div class="choice">토요 작품</div>
-        <div class="choice">일요 작품</div>
+        <div class="choice"><a href="/week/content/view">요일 전체</a></div>
+        <div class="choice"><a href="/mon/content">월요 웹툰</a></div>
+        <div class="choice"><a href="/tue/content">화요 웹툰</a></div>
+        <div class="choice"><a href="/wed/content">수요 웹툰</a></div>
+        <div class="choice"><a href="/thu/content">목요 웹툰</a></div>
+        <div class="choice"><a href="/fri/content">금요 웹툰</a></div>
+        <div class="choice"><a href="/sat/content">토요 웹툰</a></div>
+        <div class="choice"><a href="/sun/content">일요 웹툰</a></div>
     </div>
         <div class="work">
             

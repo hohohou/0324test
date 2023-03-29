@@ -30,7 +30,7 @@ public class MemberController {
 	@RequestMapping("/login/view")
 	public String loginView() {
 		
-		return "login_view";
+		return "login";
 	}
 	
 	@RequestMapping("/login")
@@ -130,6 +130,11 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	@RequestMapping("/inventory/view")
+	public String inventoryView() {
+		
+		return "inventory";
+	}
 	
 
 	
