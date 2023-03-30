@@ -12,7 +12,9 @@
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script>
         $( function() {
-            
+            $('#main').click(function(){
+                location.href ='/';
+            })
         });
         </script>
     <style>
@@ -40,6 +42,7 @@
             flex-direction: row;
             position: fixed;
             background-color: white;
+            z-index: 1;
         }
 
         .logo {
@@ -81,6 +84,9 @@
             margin-right: 20px;
             margin-top: -2px;
         }
+        #main{
+            cursor: pointer;
+        }
 
        
     </style>
@@ -88,8 +94,8 @@
 
 <body>
     <div class="header">
-        <div class="logo"><img src=""></div>
-        <p><a href="/">고객센터</a></p>
+        <div class="logo"><img src="" alt="main" id="main"></div>
+        <p><a href="/service/main/view">고객센터</a></p>
 
 
 

@@ -14,7 +14,7 @@
         integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
 
     <script>
-        
+
     </script>
 
     <style>
@@ -39,6 +39,7 @@
             flex-direction: row;
             position: fixed;
             background-color: white;
+            z-index: 1;
         }
 
         ul {
@@ -106,15 +107,18 @@
                 <li><a href="/membership/view">멤버쉽</a></li>
 
             </ul>
-            <img src="" class="search_img">
-            <input type="text" class="search_bar" placeholder="제목,제작사,감독으로 검색(초성)">
+            <form action="/search" method="get">
+                <img src="" class="search_img">
+                <input type="text" class="search_bar" placeholder="제목,제작사,감독으로 검색(초성)">
+                <button type="submit">검색</button>
+            </form>
         </div>
 
 
 
         <div class="login">
             <a th:if="${session.dto == null} and ${session.addto == null}" href="/login/view">로그인/가입</a>
-            
+
             <a th:if="${session.dto != null}" href="/inventory/view">[[${session.dto.nick}]]</a>
             <a th:if="${session.dto != null}" href="/member/check/view"> &nbsp;&nbsp;&nbsp; 내정보 변경</a>
             <a th:if="${session.dto != null}" href="/logout"> &nbsp;&nbsp;&nbsp; 로그아웃</a>

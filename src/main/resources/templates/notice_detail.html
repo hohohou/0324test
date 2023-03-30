@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공지사항</title>
+</head>
+<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+	crossorigin="anonymous"></script>
+
+<script>
+	$(function () {
+       $('#comment_login').click(function(){
+            var result = confirm('로그인이 필요한 서비스입니다. 로그인 하시겠습니까?');
+            if(result == true) location.href = '/login/view';
+            else alert('취소하셨습니다.');
+       });
+	});
+
+</script>
+<style>
+    .section_container {
+        width: 1000px;
+        margin: 0 auto;
+        position: relative;
+        top: 80px;
+
+    }
+
+    .list_link {
+        text-decoration: none;
+    }
+
+    .list_item {
+        list-style: none;
+        padding: 10px;
+    }
+
+    .page_header {
+        text-align: left;
+        margin-left: 40px;
+    }
+
+    a {
+        color: black;
+    }
+</style>
+
+<body>
+    <th:block th:include="fragments/service_center_header"></th:block>
+    <div class="section_container">
+        <section id="main_content" class="section_content">
+            <header class="page_header">
+                <h2><a href="/notice/view">공지사항</a></h2>
+            </header>
+            <ul class="list">
+                    <input type="hidden" name="noticeNum" th:value="${ndto.noticeNum}">
+                    <li class="list_item">[[${ndto.title}]] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;조회수 : [[${ndto.viewCount}]]</li>
+                    <hr>
+                    <li>[[${ndto.content}]]</li>
+            </ul>
+            <hr>
+            <form action="/notice/comment/add" method="post" class="comment_area">
+                <input type="text" id="comment_login" th:if="${session.dto == null}" readonly placeholder="로그인 후 이용하실 수 있습니다."><button th:if="${session.dto == null}" type="button" id="btn_comment">등록</button>
+                <input type="text" name="content" th:if="${session.dto != null}" placeholder="댓글을 입력해 주세요."><button th:if="${session.dto != null}" type="submit" id="btn_comment">등록</button>
+            </form>
+            <p th:if="${cdto == null}">
+                댓글이 아직 없습니다.
+            </p>
+            
+            
+            <p th:each="comment : ${cdto}" th:if="${cdto != null}">
+                [[${comment.writer}]] : [[${comment.content}]]
+            </p>
+
+        </section>
+    </div>
+</body>
+
+</html>

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.pro.dto.FileDTO;
 import com.pro.dto.InquiryAnswerDTO;
 import com.pro.dto.InquiryDTO;
+import com.pro.dto.NoticeCommentDTO;
+import com.pro.dto.NoticeDTO;
 import com.pro.mapper.ServiceMapper;
 
 @Service
@@ -93,6 +95,26 @@ public class ServiceCenterService {
 	public FileDTO selectImageFile(int fileNum) {
 		
 		return serviceMapper.selectImageFile(fileNum);
+	}
+	public List<NoticeDTO> selectAllNotice() {
+		
+		return serviceMapper.selectAllNotice();
+	}
+	public int updateNoticeCount(int noticeNum) {
+		
+		return serviceMapper.updateNoticeCount(noticeNum);
+	}
+	public NoticeDTO selectNotice(int noticeNum) {
+		
+		return serviceMapper.selectNotice(noticeNum);
+	}
+	public List<NoticeCommentDTO> selectNoticeComment(int noticeNum) {
+		
+		return serviceMapper.selectNoticeComment(noticeNum);
+	}
+	public int insertNoticeComment(NoticeCommentDTO ndto) {
+		
+		return serviceMapper.insertNoticeComment(ndto);
 	}
 	
 	

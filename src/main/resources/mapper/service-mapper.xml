@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pro.mapper.ServiceMapper">
-	
+
 
 	<select id="selectInquiryNum" resultType="int">
 		select
@@ -63,7 +63,8 @@
 	<insert id="insertFile" parameterType="file">
 		insert into inquiry_file
 		values((SELECT nvl(max(file_num),0) FROM inquiry_file WHERE
-		inquirynum = #{inquiryNum}) + 1,#{inquiryNum},#{path})
+		inquirynum
+		= #{inquiryNum}) + 1,#{inquiryNum},#{path})
 	</insert>
 	<select id="selectFileList" parameterType="int"
 		resultType="file">
@@ -77,8 +78,32 @@
 	<select id="selectFile" parameterType="hashMap"
 		resultType="file">
 		select * from inquiry_file where inquirynum =
-		#{inquiryNum} and filenum = #{fileNum}
+		#{inquiryNum}
+		and filenum = #{fileNum}
 	</select>
+	<select id="selectAllNotice" resultType="notice">
+		select * from notice
+	</select>
+	<update id="updateNoticeCount" parameterType="int">
+	UPDATE notice
+		set viewcount = viewcount + 1 where noticenum= #{noticeNum}
+	</update>
+	<select id="selectNotice" parameterType="int" resultType="notice">
+	select * from notice where noticenum = #{noticeNum}
+	</select>
+	<select id="selectNoticeComment" parameterType="int" resultType="ncomment">
+		select * from notice_comment where noticenum = #{noticeNum}
+	</select>
+	<insert id="insertNoticeComment" parameterType="ncomment">
+		insert into notice_comment(commentnum,noticenum,writer,content)
+		values(ncomment_seq.nextval, #{commentNum},#{writer},#{content})
+
+	</insert>
+	
+	
+	
+ 	
+
 
 
 

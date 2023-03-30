@@ -9,6 +9,7 @@ import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +20,7 @@ import org.apache.catalina.Server;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,6 +31,8 @@ import com.pro.dto.FileDTO;
 import com.pro.dto.InquiryAnswerDTO;
 import com.pro.dto.InquiryDTO;
 import com.pro.dto.MemberDTO;
+import com.pro.dto.NoticeCommentDTO;
+import com.pro.dto.NoticeDTO;
 import com.pro.service.MemberService;
 import com.pro.service.ServiceCenterService;
 
@@ -255,6 +259,46 @@ public class ServiceCenterController {
 		view.addObject("list", list);
 		view.setViewName("service_center_admin_inquiry_list");
 		return view;
+	}
+	
+	@RequestMapping("/notice/view")
+	public ModelAndView noticeView(ModelAndView view) {
+		List<NoticeDTO> list = serviceService.selectAllNotice();
+		view.addObject("list", list);
+		view.setViewName("notice");
+		
+		
+		return view;
+	}
+	
+	@RequestMapping("/notice/detail/{noticeNum}")
+	public ModelAndView noticeDetail(@PathVariable("noticeNum") int noticeNum, ModelAndView view, HttpSession session) {
+		HashSet<Integer> set = (HashSet<Integer>) session.getAttribute("history");
+		if(set == null) {
+			set = new HashSet<Integer>();
+			session.setAttribute("history", set);
+		}
+		if(set.add(noticeNum)) serviceService.updateNoticeCount(noticeNum);
+		
+		NoticeDTO ndto = serviceService.selectNotice(noticeNum);
+		List<NoticeCommentDTO> cdto = serviceService.selectNoticeComment(noticeNum);
+		
+		
+		view.addObject("ndto", ndto);
+		view.addObject("cdto",cdto);
+		view.setViewName("notice_detail");
+		return view;
+	}
+	@RequestMapping("/notice/comment/add")
+	public String noticeCommentAdd(NoticeCommentDTO ndto, String content, HttpSession session) {
+		
+		MemberDTO mdto = (MemberDTO) session.getAttribute("dto");
+	
+		ndto.setWriter(mdto.getNick());
+		
+		int result = serviceService.insertNoticeComment(ndto);
+		
+		return "redirect:/notice/detail/"+ndto.getNoticeNum();
 	}
 
 }
