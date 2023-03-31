@@ -96,9 +96,27 @@
 	</select>
 	<insert id="insertNoticeComment" parameterType="ncomment">
 		insert into notice_comment(commentnum,noticenum,writer,content)
-		values(ncomment_seq.nextval, #{commentNum},#{writer},#{content})
+		values(ncomment_seq.nextval, #{noticeNum},#{writer},#{content})
 
 	</insert>
+	<insert id="insertNoticeLike" parameterType="hashMap">
+		insert into notice_like values(#{noticeNum}, #{email})
+	</insert>
+	<delete id="deleteNoticeLike" parameterType="hashMap">
+		delete from notice_like where noticenum = #{noticeNum} and email = #{email}
+	</delete>
+	<select id="selectNoticeLike" resultType="int">
+		select count(*) from notice_like
+	</select>
+	<insert id="insertNoticeHate" parameterType="hashMap">
+		insert into notice_hate values(#{noticeNum}, #{email})
+	</insert>
+	<delete id="deleteNoticeHate" parameterType="hashMap">
+		delete from notice_hate where noticenum = #{noticeNum} and email = #{email}
+	</delete>
+	<select id="selectNoticeHate" resultType="int">
+		select count(*) from notice_hate
+	</select>
 	
 	
 	

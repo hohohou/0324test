@@ -1,2 +1,0 @@
-INSERT INTO BOARD.ADMIN (ID,PASSWD) VALUES
-	 ('asd','asd');

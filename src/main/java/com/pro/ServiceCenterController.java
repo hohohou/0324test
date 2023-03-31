@@ -281,6 +281,8 @@ public class ServiceCenterController {
 		if(set.add(noticeNum)) serviceService.updateNoticeCount(noticeNum);
 		
 		NoticeDTO ndto = serviceService.selectNotice(noticeNum);
+		ndto.setNlike((int) serviceService.selectNoticeLike());
+		System.out.println(ndto.toString());
 		List<NoticeCommentDTO> cdto = serviceService.selectNoticeComment(noticeNum);
 		
 		
@@ -290,15 +292,44 @@ public class ServiceCenterController {
 		return view;
 	}
 	@RequestMapping("/notice/comment/add")
-	public String noticeCommentAdd(NoticeCommentDTO ndto, String content, HttpSession session) {
+	public String noticeCommentAdd(NoticeCommentDTO cdto, String content, HttpSession session) {
 		
 		MemberDTO mdto = (MemberDTO) session.getAttribute("dto");
-	
-		ndto.setWriter(mdto.getNick());
+		cdto.setWriter(mdto.getNick());
 		
-		int result = serviceService.insertNoticeComment(ndto);
+		int result = serviceService.insertNoticeComment(cdto);
+		System.out.println(cdto.toString());
+		return "redirect:/notice/detail/"+cdto.getNoticeNum();
+	}
+	@RequestMapping("/notice/like/{noticeNum}")
+	public ResponseEntity<String> noticeLikeCount(@PathVariable(name = "noticeNum") int noticeNum, HttpSession session){
+		HashMap<String, Object> map = new HashMap<>();
+		MemberDTO dto = (MemberDTO) session.getAttribute("dto");
+		int result = serviceService.noticeLike(noticeNum, dto.getEmail());
 		
-		return "redirect:/notice/detail/"+ndto.getNoticeNum();
+		if(result != 0) {
+			map.put("msg", "해당 공지사항에 좋아요를 누르셨습니다.");
+		}else {
+			map.put("msg", "해당 공지사항에 좋아요를 취소하셨습니다.");
+		}
+		map.put("nlike", serviceService.selectNoticeLike());
+		
+		return new ResponseEntity(map, HttpStatus.OK);
+	}
+	@RequestMapping("/notice/hate/{noticeNum}")
+	public ResponseEntity<String> noticeHateCount(@PathVariable(name = "noticeNum") int noticeNum, HttpSession session){
+		HashMap<String, Object> map = new HashMap<>();
+		MemberDTO dto = (MemberDTO) session.getAttribute("dto");
+		int result = serviceService.noticeHate(noticeNum, dto.getEmail());
+		
+		if(result != 0) {
+			map.put("msg", "해당 공지사항에 좋아요를 누르셨습니다.");
+		}else {
+			map.put("msg", "해당 공지사항에 좋아요를 취소하셨습니다.");
+		}
+		map.put("nlike", serviceService.selectNoticeHate());
+		
+		return new ResponseEntity(map, HttpStatus.OK);
 	}
 
 }

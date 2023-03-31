@@ -58,9 +58,21 @@ public interface ServiceMapper {
 
 	List<NoticeCommentDTO> selectNoticeComment(int noticeNum);
 
-	int insertNoticeComment(NoticeCommentDTO ndto);
+	int insertNoticeComment(NoticeCommentDTO cdto);
 
-	
+	Object selectNoticeLike();
+
+	int insertNoticeLike(HashMap<String, Object> map);
+
+	int deleteNoticeLike(HashMap<String, Object> map);
+
+	int insertNoticeHate(HashMap<String, Object> map);
+
+	int deleteNoticeHate(HashMap<String, Object> map);
+
+	Object selectNoticeHate();
+
+
 
 
 }
