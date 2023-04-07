@@ -11,6 +11,14 @@ public class NoticeDTO {
 	private int viewCount;
 	private int nlike;
 	private int nhate;
+	private int commentCount;
+	
+	public int getCommentCount() {
+		return commentCount;
+	}
+	public void setCommentCount(int commentCount) {
+		this.commentCount = commentCount;
+	}
 	public int getNlike() {
 		return nlike;
 	}
@@ -57,7 +65,7 @@ public class NoticeDTO {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public NoticeDTO(int noticeNum, String title, String content, String wdate, int viewCount, int nlike, int nhate) {
+	public NoticeDTO(int noticeNum, String title, String content, String wdate, int viewCount, int nlike, int nhate, int commentCount) {
 		super();
 		this.noticeNum = noticeNum;
 		this.title = title;
@@ -66,12 +74,15 @@ public class NoticeDTO {
 		this.viewCount = viewCount;
 		this.nlike = nlike;
 		this.nhate = nhate;
+		this.commentCount = commentCount;
 	}
 	@Override
 	public String toString() {
 		return "NoticeDTO [noticeNum=" + noticeNum + ", title=" + title + ", content=" + content + ", wdate=" + wdate
-				+ ", viewCount=" + viewCount + ", nlike=" + nlike + ", nhate=" + nhate + "]";
+				+ ", viewCount=" + viewCount + ", nlike=" + nlike + ", nhate=" + nhate + ", commentCount="
+				+ commentCount + "]";
 	}
+	
 		
 	
 	

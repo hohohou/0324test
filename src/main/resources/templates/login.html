@@ -132,7 +132,9 @@
 	<div class="login-box">
 		<img src="img/logo.png" alt="">
 		<h1>로그인</h1>
+
 		<form action="/login">
+			<input type="hidden" name="referer" th:value="${referer}">
 			<input type="text" id="email" name="email" placeholder="이메일을 입력하세요." required>
 			<input type="password" id="passwd" name="passwd" placeholder="비밀번호를 입력하세요." required>
 			<input class="login_bu" type="submit" value="로그인">

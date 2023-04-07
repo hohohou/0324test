@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>공지사항</title>
 </head>
+
 <style>
     .section_container {
         width: 1000px;
@@ -42,9 +43,9 @@
                 <h2>공지사항</h2>
             </header>
             <ul class="list">
-                <th:block th:each="list : ${list}">
-                    <li class="list_item"><a th:href="@{/notice/detail/{noticeNum}(noticeNum=${list.noticeNum })}"
-                            class="list_link" th:text="${list.title}"></a> 조회수 [[${list.viewCount}]]</li>
+                <th:block th:each="notice : ${list}">
+                    <li class="list_item"><a th:href="@{/notice/detail/{noticeNum}(noticeNum=${notice.noticeNum })}"
+                            class="list_link" th:text="${notice.title}"></a><span >&nbsp;[ [[${notice.commentCount}]] ]</span> 조회수 [[${notice.viewCount}]]</li>
                     <hr>
                 </th:block>
                 

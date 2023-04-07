@@ -36,6 +36,13 @@
             });
         });
         $('#hate').click(function () {
+            var dto = '[[${session.dto}]]';
+
+            if (dto == "null") {
+                var result = confirm('로그인이 필요한 서비스입니다. 로그인 하시겠습니까?');
+                if (result == true) location.href = '/login/view';
+                else alert('취소하셨습니다.');
+            }
             $.ajax({
                 url: '/notice/hate/[[${ndto.noticeNum}]]',
                 type: 'post',
@@ -46,6 +53,25 @@
                 }
             });
         });
+
+
+        $('.btn_delete').click(function () {
+            let commentNum = $(this).siblings().first().val();
+            let noticeNum = $(this).parent().find('input[name=noticeNum]').val();
+            console.log(commentNum, noticeNum);
+            $.ajax({
+                url: `/comment/delete/${commentNum}/${noticeNum}`,
+                type: 'post',
+                dataType: 'json',
+                success: function (r) {
+                    alert(r.msg);
+                    $(this).parent().remove();
+                    location.reload();
+                }
+            });
+        });
+
+       
 
 
     });
@@ -76,6 +102,9 @@
 
     a {
         color: black;
+    }
+    #btn_delete{
+        cursor: pointer;
     }
 </style>
 
@@ -110,10 +139,22 @@
                 댓글이 아직 없습니다.
             </p>
 
-            <p>댓글 갯수 : </p>
-            <p th:each="comment : ${cdto}" th:if="${cdto != null}">
-                [[${comment.writer}]] : [[${comment.content}]]
-            </p>
+            <p>댓글 갯수 : [[${count}]]</p>
+            <div th:each="comment : ${cdto}" th:if="${cdto != null}">
+                <p>
+                    <input type="hidden" name="commentNum" th:value="${comment.commentNum}">
+                    <input type="hidden" name="noticeNum" th:value="${comment.noticeNum}">
+                    [[${comment.writer}]] : [[${comment.content}]] <button type="button" class="btn_delete"
+                        th:if="${session.dto != null} and ${session.dto.nick == comment.writer}">삭제</button>
+                </p>
+            </div>
+
+
+
+
+
+           
+
 
         </section>
     </div>

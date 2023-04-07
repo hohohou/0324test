@@ -139,38 +139,65 @@ public class ServiceCenterService {
 
 	public int noticeLike(int noticeNum, String email) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
+		int result = 0;
 		map.put("noticeNum", noticeNum);
 		map.put("email", email);
 		try {
-			return serviceMapper.insertNoticeLike(map);
+			result =  serviceMapper.insertNoticeLike(map);
 		} catch (Exception e) {
-			return serviceMapper.deleteNoticeLike(map);
+			serviceMapper.deleteNoticeLike(map);
 
 		}
+		
+		return result;
 
 	}
 
-	public Object selectNoticeLike() {
+	public Object selectNoticeLike(int noticeNum) {
 
-		return serviceMapper.selectNoticeLike();
+		return serviceMapper.selectNoticeLike(noticeNum);
 	}
 
 	public int noticeHate(int noticeNum, String email) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
+		int result = 0;
 		map.put("noticeNum", noticeNum);
 		map.put("email", email);
 		try {
-			return serviceMapper.insertNoticeHate(map);
+			result = serviceMapper.insertNoticeHate(map);
 		} catch (Exception e) {
-			return serviceMapper.deleteNoticeHate(map);
+			serviceMapper.deleteNoticeHate(map);
 
 		}
+		return result;
+	}
+
+	public Object selectNoticeHate(int noticeNum) {
+		
+		return serviceMapper.selectNoticeHate(noticeNum);
+	}
+
+	public int countComment(int noticeNum) {
+		
+		return serviceMapper.countComment(noticeNum);
+	}
+
+	public List<NoticeDTO> searchNotice(String search) {
+		
+		
+		return serviceMapper.searchNotice(search);
 		
 	}
 
-	public Object selectNoticeHate() {
-		
-		return serviceMapper.selectNoticeHate();
+	public int deleteComment(int noticeNum, int commentNum) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("commentNum", commentNum);
+		map.put("noticeNum", noticeNum);
+		return serviceMapper.deleteComment(map);
 	}
+
+	
+
+	
 
 }

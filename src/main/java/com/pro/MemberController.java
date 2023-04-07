@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.net.http.HttpResponse;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -28,30 +29,43 @@ public class MemberController {
 
 
 	@RequestMapping("/login/view")
-	public String loginView() {
-		
-		return "login";
+	public ModelAndView loginView(HttpServletRequest request, ModelAndView view) {
+		String referer = request.getHeader("Referer");
+		System.out.println(referer);
+		view.addObject("referer", referer);
+		view.setViewName("login");
+		return view;
 	}
 	
 	@RequestMapping("/login")
-	public String login(HttpSession session, String email, String passwd ,HttpServletResponse response) throws IOException {
+	public ModelAndView login(HttpSession session, String email, String passwd ,HttpServletResponse response, HttpServletRequest request, String referer, ModelAndView view) throws IOException {
 		
 		MemberDTO dto = memberService.login(email, passwd);
 		AdminDTO addto = memberService.adminLogin(email, passwd);
+		System.out.println(referer.substring(21));
+		
 		if(dto != null) {
 			session.setAttribute("dto", dto);
+			view.setViewName("redirect:/"+referer.substring(22));
+			
 		}
 		if (dto == null && addto != null) {
-			session.setAttribute("addto", addto);			
+			session.setAttribute("addto", addto);
+			view.setViewName("redirect:/"+referer.substring(22));
 		}
 		if(dto == null && addto == null){
 			response.setContentType("text/html; charset=euc-kr");
 			PrintWriter out = response.getWriter();
 			out.println("<script>alert('아이디, 비밀번호를 확인해주십시오'); history.back();</script>");
 			out.flush();	
+			view.setViewName("redirect:/login/view");
 		}
 		
-		return "redirect:/";
+		
+		return view;
+		
+		
+		
 	} 
 	
 	@RequestMapping("/logout")

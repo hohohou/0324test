@@ -60,7 +60,7 @@ public interface ServiceMapper {
 
 	int insertNoticeComment(NoticeCommentDTO cdto);
 
-	Object selectNoticeLike();
+	Object selectNoticeLike(int noticeNum);
 
 	int insertNoticeLike(HashMap<String, Object> map);
 
@@ -70,7 +70,15 @@ public interface ServiceMapper {
 
 	int deleteNoticeHate(HashMap<String, Object> map);
 
-	Object selectNoticeHate();
+	Object selectNoticeHate(int noticeNum);
+
+	int countComment(int noticeNum);
+
+	List<NoticeDTO> searchNotice(String search);
+
+	int deleteComment(HashMap<String, Object> map);
+
+	
 
 
 

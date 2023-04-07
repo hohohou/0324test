@@ -45,9 +45,11 @@ public class ServiceCenterController {
 	}
 
 	@RequestMapping("/service/main/view")
-	public String serviceMain() {
-		
-		return "service_center_main";
+	public ModelAndView serviceMain(ModelAndView view) {
+		List<NoticeDTO> list = serviceService.selectAllNotice();
+		view.addObject("list", list);
+		view.setViewName("service_center_main");
+		return view;
 	}
 
 	@RequestMapping("/inquiry")
@@ -264,6 +266,9 @@ public class ServiceCenterController {
 	@RequestMapping("/notice/view")
 	public ModelAndView noticeView(ModelAndView view) {
 		List<NoticeDTO> list = serviceService.selectAllNotice();
+		
+		System.out.println(list.toString());
+		
 		view.addObject("list", list);
 		view.setViewName("notice");
 		
@@ -281,11 +286,13 @@ public class ServiceCenterController {
 		if(set.add(noticeNum)) serviceService.updateNoticeCount(noticeNum);
 		
 		NoticeDTO ndto = serviceService.selectNotice(noticeNum);
-		ndto.setNlike((int) serviceService.selectNoticeLike());
+		ndto.setNlike((int) serviceService.selectNoticeLike(noticeNum));
+		ndto.setNhate((int) serviceService.selectNoticeHate(noticeNum));
 		System.out.println(ndto.toString());
 		List<NoticeCommentDTO> cdto = serviceService.selectNoticeComment(noticeNum);
+		int count = serviceService.countComment(noticeNum);
 		
-		
+		view.addObject("count", count);
 		view.addObject("ndto", ndto);
 		view.addObject("cdto",cdto);
 		view.setViewName("notice_detail");
@@ -312,7 +319,7 @@ public class ServiceCenterController {
 		}else {
 			map.put("msg", "해당 공지사항에 좋아요를 취소하셨습니다.");
 		}
-		map.put("nlike", serviceService.selectNoticeLike());
+		map.put("nlike", serviceService.selectNoticeLike(noticeNum));
 		
 		return new ResponseEntity(map, HttpStatus.OK);
 	}
@@ -323,13 +330,36 @@ public class ServiceCenterController {
 		int result = serviceService.noticeHate(noticeNum, dto.getEmail());
 		
 		if(result != 0) {
-			map.put("msg", "해당 공지사항에 좋아요를 누르셨습니다.");
+			map.put("msg", "해당 공지사항에 싫어요를 누르셨습니다.");
 		}else {
-			map.put("msg", "해당 공지사항에 좋아요를 취소하셨습니다.");
+			map.put("msg", "해당 공지사항에 싫어요를 취소하셨습니다.");
 		}
-		map.put("nlike", serviceService.selectNoticeHate());
+		map.put("nhate", serviceService.selectNoticeHate(noticeNum));
 		
 		return new ResponseEntity(map, HttpStatus.OK);
+	}
+	@RequestMapping("/service/search")
+	public ModelAndView servcieSearch(String search, ModelAndView view) {
+		List<NoticeDTO> nlist = serviceService.searchNotice(search);
+		System.out.println(nlist.toString());
+		view.addObject("search", search);
+		view.addObject("nlist", nlist);
+		view.setViewName("service_search_result");
+		return view;
+	}
+	
+	@RequestMapping("/comment/delete/{commentNum}/{noticeNum}")
+	public ResponseEntity<String> commentDelete(@PathVariable(name = "commentNum") int commentNum, @PathVariable(name = "noticeNum") int noticeNum){
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		int result = serviceService.deleteComment(noticeNum, commentNum);
+		System.out.println(result);
+		if(result != 0) {
+			map.put("msg", "댓글을 삭제하셨습니다.");
+		}else {
+			map.put("msg", "댓글삭제가 실패하였습니다.");
+		}
+		
+		return new ResponseEntity(map,HttpStatus.OK);
 	}
 
 }
