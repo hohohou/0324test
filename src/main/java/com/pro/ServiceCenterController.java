@@ -361,5 +361,44 @@ public class ServiceCenterController {
 		
 		return new ResponseEntity(map,HttpStatus.OK);
 	}
-
+	
+	@RequestMapping("/admin/notice/add")
+	public String adminNoticAddView(){
+		
+		return "notice_add";
+	}
+	
+	@RequestMapping("/notice/add")
+	public String noticeAdd(NoticeDTO dto) {
+		int result = serviceService.addNotice(dto);
+		
+		return "redirect:/notice/view";
+	}
+	
+	@RequestMapping("/notice/delete/{noticeNum}")
+	public String noticeDelete(@PathVariable(name = "noticeNum") int noticeNum) {
+		int result = serviceService.noticeDelete(noticeNum);
+		int result1 = serviceService.noticeCommentAllDelete(noticeNum);
+		int result2 = serviceService.noticeLikeAllDelete(noticeNum);
+		int result3 = serviceService.noticeHateAllDelete(noticeNum);
+		
+		
+		return "redirect:/notice/view";
+	}
+	@RequestMapping("/notice/update/{noticeNum}")
+	public ModelAndView noticeUpdateView(@PathVariable(name = "noticeNum") int noticeNum, ModelAndView view) {
+		
+		NoticeDTO dto = serviceService.selectNotice(noticeNum);
+		
+		view.addObject("dto", dto);
+		view.setViewName("notice_Update");
+		return view;
+	}
+	@RequestMapping("notice/update")
+	public String noticeUpdate(NoticeDTO dto) {
+		int result = serviceService.noticeUpdate(dto);
+		System.out.println(dto.toString());
+		return "redirect:/notice/view";
+	}
+	
 }

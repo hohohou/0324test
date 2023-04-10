@@ -130,8 +130,27 @@
 	<delete id="deleteComment" parameterType="hashMap">
 		delete from notice_comment where commentnum = #{commentNum} and noticenum = #{noticeNum}
 	</delete>
-	
-	
+	<delete id="deleteNotice" parameterType="int">
+		delete from notice where noticenum = #{noticeNum}
+	</delete>
+	<select id="selectNoticeNum" resultType="int">
+		select noticenum_seq.nextval from dual
+	</select>
+	<insert id="addNotice" parameterType="notice">
+		insert into notice(noticenum,title,content) values(#{noticeNum},#{title},#{content})
+	</insert>
+	<update id="updateNotice" parameterType="notice">
+		update notice set title = #{title} ,content = #{content} where noticenum = #{noticeNum}
+	</update>
+	<delete id="noticeCommentAllDelete" parameterType="int">
+		delete from notice_comment where noticenum = #{noticeNum}
+	</delete>
+	<delete id="noticeLikeAllDelete" parameterType="int">
+		delete from notice_like where noticenum = #{noticeNum}
+	</delete>
+	<delete id="noticeHateAllDelete" parameterType="int">
+		delete from notice_hate where noticenum = #{noticeNum}
+	</delete>
 	
 	
  	

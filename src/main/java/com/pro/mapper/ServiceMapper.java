@@ -78,6 +78,22 @@ public interface ServiceMapper {
 
 	int deleteComment(HashMap<String, Object> map);
 
+	int deleteNotice(int noticeNum);
+
+	int selectNoticeNum();
+
+	int addNotice(NoticeDTO dto);
+
+	int updateNotice(NoticeDTO dto);
+
+	int noticeCommentAllDelete(int noticeNum);
+
+	int noticeLikeHateAllDelete(int noticeNum);
+
+	int noticeLikeAllDelete(int noticeNum);
+
+	int noticeHateAllDelete(int noticeNum);
+
 	
 
 

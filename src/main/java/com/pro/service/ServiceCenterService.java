@@ -196,6 +196,37 @@ public class ServiceCenterService {
 		return serviceMapper.deleteComment(map);
 	}
 
+	public int noticeDelete(int noticeNum) {
+		
+		return serviceMapper.deleteNotice(noticeNum);
+	}
+
+	public int addNotice(NoticeDTO dto) {
+		dto.setNoticeNum(serviceMapper.selectNoticeNum());
+		
+		return serviceMapper.addNotice(dto);
+	}
+
+	public int noticeUpdate(NoticeDTO dto) {
+		
+		return serviceMapper.updateNotice(dto);
+	}
+
+	public int noticeCommentAllDelete(int noticeNum) {
+		
+		return serviceMapper.noticeCommentAllDelete(noticeNum);
+	}
+
+	public int noticeLikeAllDelete(int noticeNum) {
+		
+		return serviceMapper.noticeLikeAllDelete(noticeNum);
+	}
+
+	public int noticeHateAllDelete(int noticeNum) {
+		
+		return serviceMapper.noticeHateAllDelete(noticeNum);
+	}
+
 	
 
 	

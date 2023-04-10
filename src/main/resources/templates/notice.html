@@ -45,12 +45,13 @@
             <ul class="list">
                 <th:block th:each="notice : ${list}">
                     <li class="list_item"><a th:href="@{/notice/detail/{noticeNum}(noticeNum=${notice.noticeNum })}"
-                            class="list_link" th:text="${notice.title}"></a><span >&nbsp;[ [[${notice.commentCount}]] ]</span> 조회수 [[${notice.viewCount}]]</li>
-                    <hr>
+                            class="list_link" th:text="${notice.title}"></a><span>&nbsp;[ [[${notice.commentCount}]] ]</span> 조회수 [[${notice.viewCount}]]</li>
+                    <hr> 
                 </th:block>
-                
+
 
             </ul>
+            <a th:if="${session.addto != null}" href="/admin/notice/add">공지쓰기</a>
         </section>
     </div>
 </body>

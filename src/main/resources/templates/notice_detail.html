@@ -71,6 +71,10 @@
             });
         });
 
+        $('.delete').click(function(){
+            alert('삭제되었습니다.');
+
+        });
        
 
 
@@ -133,6 +137,8 @@
                 <input type="text" name="content" th:if="${session.dto != null}" placeholder="댓글을 입력해 주세요."><button
                     th:if="${session.dto != null}" type="submit" id="btn_comment">등록</button>
             </form>
+            <a class="delete" th:href="@{/notice/delete/{noticeNum}(noticeNum = ${ndto.noticeNum})}" th:if="${session.addto != null}">공지 삭제</a>
+            <a th:href="@{/notice/update/{noticeNum}(noticeNum = ${ndto.noticeNum})}" th:if="${session.addto != null}">공지 수정</a>
 
 
             <p th:if="${cdto == null}">

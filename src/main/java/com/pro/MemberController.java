@@ -51,7 +51,7 @@ public class MemberController {
 		}
 		if (dto == null && addto != null) {
 			session.setAttribute("addto", addto);
-			view.setViewName("redirect:/"+referer.substring(22));
+			view.setViewName("redirect:/");
 		}
 		if(dto == null && addto == null){
 			response.setContentType("text/html; charset=euc-kr");
