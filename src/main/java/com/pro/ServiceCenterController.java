@@ -263,6 +263,7 @@ public class ServiceCenterController {
 		return view;
 	}
 	
+	
 	@RequestMapping("/notice/view")
 	public ModelAndView noticeView(ModelAndView view) {
 		List<NoticeDTO> list = serviceService.selectAllNotice();
@@ -401,4 +402,17 @@ public class ServiceCenterController {
 		return "redirect:/notice/view";
 	}
 	
+	@RequestMapping("/admin/inquiry/sort/{type}/{answer}")
+	public ResponseEntity<String> inquiryTypeSort(@PathVariable(name = "type") String type, @PathVariable(name = "answer") String answer) {
+		System.out.println(type);
+		if(type.equals("all"))
+			type = null;
+		if(answer.equals("all"))
+			answer = null;
+		System.out.println(type);
+		List<NoticeDTO> list = serviceService.inquiryTypeSort(type, answer);
+		
+		
+		return new ResponseEntity(list,HttpStatus.OK);
+	}
 }

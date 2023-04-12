@@ -227,6 +227,13 @@ public class ServiceCenterService {
 		return serviceMapper.noticeHateAllDelete(noticeNum);
 	}
 
+	public List<NoticeDTO> inquiryTypeSort(String type, String answer) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("type", type);
+		map.put("answer", answer);
+		return serviceMapper.inquiryTypeSort(map);
+	}
+
 	
 
 	

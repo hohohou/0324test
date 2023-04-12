@@ -115,26 +115,51 @@ public class MemberController {
 		
 		return new ResponseEntity(map,HttpStatus.OK);
 	}
-	
-
-	
-	@RequestMapping("/member/nick/change")
-	public String updateNick() {
-		
-		
-		return "change_nick";
-	}
-	@RequestMapping("/member/email/change")
-	public String updateEmail() {
+	@RequestMapping("/member/email/change/view")
+	public String updateEmailView() {
 		
 		
 		return "change_email";
 	}
-	@RequestMapping("/member/passwd/change")
-	public String updatepasswd() {
+	@RequestMapping("/member/nick/change/view")
+	public String updateNickView() {
+		
+		
+		return "change_nick";
+	}
+	@RequestMapping("/member/passwd/change/view")
+	public String updatePasswdView() {
 		
 		
 		return "change_pwd";
+	}
+	
+	
+
+	
+	@RequestMapping("/member/update/nick")
+	public String updateNick(String nick, String email, HttpSession session) {
+		int result = memberService.updateNick(nick, email);
+		MemberDTO dto = (MemberDTO) session.getAttribute("dto");
+		dto.setNick(nick);
+		session.setAttribute("dto", dto);
+		return "redirect:/member/update/view";
+	}
+	@RequestMapping("/member/update/email")
+	public String updateEmail(String aemail,String email, HttpSession session) {
+		int result = memberService.updateEmail(email, aemail);
+		MemberDTO dto = (MemberDTO) session.getAttribute("dto");
+		dto.setEmail(email);
+		session.setAttribute("dto", dto);
+		return "redirect:/member/update/view";
+	}
+	@RequestMapping("/member/update/passwd")
+	public String updatePasswd(String email, String pwd, HttpSession session) {
+		int result = memberService.updatePasswd(pwd, email);
+		MemberDTO dto = (MemberDTO) session.getAttribute("dto");
+		dto.setPasswd(pwd);
+		session.setAttribute("dto", dto);
+		return "redirect:/member/update/view";
 	}
 	
 	@RequestMapping("/member/delete/{email}")

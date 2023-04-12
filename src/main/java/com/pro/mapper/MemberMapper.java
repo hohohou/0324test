@@ -20,4 +20,12 @@ public interface MemberMapper {
 
 	int deleteMember(String email);
 
+	int updateNick(String nick);
+
+	int updateNick(HashMap<String, Object> map);
+
+	int updateEmail(HashMap<String, Object> map);
+
+	int updatePasswd(HashMap<String, Object> map);
+
 }

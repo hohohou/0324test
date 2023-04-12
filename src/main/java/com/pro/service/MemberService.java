@@ -38,6 +38,25 @@ public class MemberService {
 		
 		return mapper.deleteMember(email);
 	}
+	public int updateNick(String nick, String email) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("nick", nick);
+		map.put("email", email);
+		
+		return mapper.updateNick(map);
+	}
+	public int updateEmail(String email, String aemail) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("aemail", aemail);
+		map.put("email", email);
+		return mapper.updateEmail(map);
+	}
+	public int updatePasswd(String pwd, String email) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("passwd", pwd);
+		map.put("email", email);
+		return mapper.updatePasswd(map);
+	}
 	
 	
 	

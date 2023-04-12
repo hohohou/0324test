@@ -92,6 +92,8 @@
                     return true;
                 } else {
                     alert("다시 입력해주세요");
+                    location.reload();
+                    return false;
 
                 }
             });
@@ -303,9 +305,10 @@
 
     <div class="create_account_step01">
         <form action="">
-            <a href="#" class="main_logo"></a>
+            <a href="/member/update/passwd" class="main_logo"></a>
             <p>비밀번호 변경</p>
             <div class="change">
+                <input type="hidden" name="email" th:value="${session.dto.email}">
                 <p>변경할 비밀번호</p>
                 <input type="text" name="pwd" placeholder="비밀번호를 입력해주세요">
                 <p id="pwd"></p>
@@ -315,7 +318,7 @@
             </div>
 
             <div class="btn_container">
-                <button type="button" class="btn btn_blue">변경 완료</button>
+                <button type="submit" class="btn btn_blue">변경 완료</button>
             </div>
         </form>
     </div>

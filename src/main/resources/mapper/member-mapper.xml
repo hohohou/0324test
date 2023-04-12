@@ -20,5 +20,14 @@
 	<delete id="deleteMemeber">
 		delete from member where email = #{email}
 	</delete>
+	<update id="updateNick" parameterType="hashMap">
+		update member set nick = #{nick} where email = #{email}
+	</update>
+	<update id="updateEmail" parameterType="hashMap">
+		update member set email = #{email} where email = #{aemail}
+	</update>
+	<update id="updatePasswd" parameterType="hashMap">
+		update member set passwd = #{passwd} where email = #{email}
+	</update>
 	
 </mapper>

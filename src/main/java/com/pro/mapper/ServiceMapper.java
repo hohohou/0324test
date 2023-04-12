@@ -94,6 +94,8 @@ public interface ServiceMapper {
 
 	int noticeHateAllDelete(int noticeNum);
 
+	List<NoticeDTO> inquiryTypeSort(HashMap<String, Object> map);
+
 	
 
 

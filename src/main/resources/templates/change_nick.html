@@ -40,14 +40,16 @@
 
 
 
-            $('.btn_blue').click(function(){
-                if($('[name=nick]').hasClass('blue') == true &&
-                $('[name=nick]').hasClass('red') == false){
+            $('.btn_blue').click(function () {
+                if ($('[name=nick]').hasClass('blue') == true &&
+                    $('[name=nick]').hasClass('red') == false) {
                     alert("변경이 완료되었습니다.");
-                    location.replace('change_main.html');
                     return true;
-                }else{
+                } else {
                     alert("다시 입력해주세요");
+                    location.reload();
+                    return false;
+
                 }
             });
 
@@ -254,22 +256,23 @@
 </head>
 
 <body>
-    <th:block th:include="fragments/main_header" ></th:block>
+    <th:block th:include="fragments/main_header"></th:block>
 
 
 
     <div class="create_account_step01">
-        <form action="">
+        <form action="/member/update/nick">
             <a href="#" class="main_logo"></a>
             <p>닉네임 변경</p>
             <div class="change">
                 <p>닉네임</p>
-            <input type="text" name="nick" placeholder="닉네임을 입력해주세요">
-            <p id="nick"></p>
+                <input type="hidden" name="email" th:value="${session.dto.email}">
+                <input type="text" name="nick" placeholder="닉네임을 입력해주세요">
+                <p id="nick"></p>
             </div>
 
             <div class="btn_container">
-                <button type="button" class="btn btn_blue">변경 완료</button>
+                <button type="submit" class="btn btn_blue">변경 완료</button>
             </div>
         </form>
     </div>

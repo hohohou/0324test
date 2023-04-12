@@ -53,6 +53,8 @@
                     return true;
                 }else{
                     alert("다시 입력해주세요");
+                    location.reload();
+                    return false;
                 }
             });
 
@@ -265,17 +267,18 @@
 
 
     <div class="create_account_step01">
-        <form action="">
+        <form action="/member/update/email">
             <a href="#" class="main_logo"></a>
             <p>이메일 변경</p>
             <div class="change">
+                <input type="hidden" name="aemail" th:value="${session.dto.email}">
                 <p>변경할 이메일</p>
                 <input type="email" name="email" placeholder="이메일을 입력해주세요">
             <p id="email"></p>
             </div>
 
             <div class="btn_container">
-                <button type="button" class="btn btn_blue">변경 완료</button>
+                <button type="submit" class="btn btn_blue">변경 완료</button>
             </div>
         </form>
     </div>

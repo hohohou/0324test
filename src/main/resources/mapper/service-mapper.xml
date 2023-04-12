@@ -151,7 +151,18 @@
 	<delete id="noticeHateAllDelete" parameterType="int">
 		delete from notice_hate where noticenum = #{noticeNum}
 	</delete>
-	
+	<select id="inquiryTypeSort" parameterType="hashMap" resultType="inquiry">
+		select * from inquiry
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+		<if test="type != null"> 
+		type = #{type}
+		</if>
+		<if test="answer != null">
+		and status = #{answer}
+		</if>
+		</trim>
+		
+	</select>
 	
  	
 

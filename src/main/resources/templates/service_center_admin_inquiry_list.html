@@ -11,7 +11,57 @@
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" th:inline="javascript">
-        
+        $(function () {
+            $('.type, .answer').on('change', function () {
+                let answer = $('.answer').val();
+                let type = $('.type').val();
+                console.log(answer, type);
+                $.ajax({
+
+                    url: `/admin/inquiry/sort/${type}/${answer}`,
+                    type: 'post',
+                    dataType: 'json',
+                    success: function (r) {
+                        console.log(r);
+                        let tag = '';
+                        if(r.length == 0)
+                            tag += '<tr><td colspan="5">문의사항이 없습니다.</td></tr>'
+
+                        for (i = 0; i < r.length; i++) {
+                            console.log(r[i].inquiryNum);
+                            tag += '<tr>';
+                            tag += '<td>' + r[i].inquiryNum + '</td>';
+                            tag += `<td><a href='/inquiry/admin/answer/${r[i].inquiryNum}'>${r[i].title}</a></td>`;
+                            if(r[i].type == 'login')
+                                tag += '<td>로그인</td>';
+                            else if(r[i].type == 'refund')
+                                tag += '<td>환불 / 혜지</td>';
+                            else if(r[i].type == 'error')
+                                tag += '<td>오류</td>';
+                            else if(r[i].type == 'membership')
+                                tag += '<td>결제 / 멤버쉽</td>';
+                            else if(r[i].type == 'how')
+                                tag += '<td>이용방법</td>';
+                            else if(r[i].type == 'event')
+                                tag += '<td>이벤트 / 혜택</td>';
+                            
+                            if(r[i].status == '0')
+                                tag += '<td>답변 안함</td>';
+                            else if(r[i].status == '1')
+                                tag += '<td>답변 완료</td>';
+
+
+                        }
+                        console.log("tag = " + tag);
+                        $('.sort').html(tag);
+                    }
+                });
+            })
+
+
+
+        });
+
     </script>
 
 
@@ -131,8 +181,7 @@
                         <th>번호</th>
                         <th>제목</th>
                         <th>
-                            <select name="type" id="type">
-                                <option value="">유형</option>
+                            <select class="type" name="type" id="type">
                                 <option value="all">전체</option>
                                 <option value="login">로그인</option>
                                 <option value="refund">환불 / 혜지</option>
@@ -143,8 +192,8 @@
                             </select>
                         </th>
                         <th>
-                            <select name="answer" id="answer">
-                                <option value="">답변 여부</option>
+                            <select class="answer" name="status" id="answer">
+                                <option value="all">전체</option>
                                 <option value="0">답변 안함</option>
                                 <option value="1">답변 완료</option>
                             </select>
@@ -159,7 +208,7 @@
                 </tr>
             </tbody>
 
-            <tbody>
+            <tbody class="sort">
                 <th:block th:each="list : ${list}">
                     <tr>
                         <td>[[${list.inquiryNum}]]</td>
