@@ -62,7 +62,7 @@
 	</select>
 	<insert id="insertFile" parameterType="file">
 		insert into inquiry_file
-		values((SELECT nvl(max(file_num),0) FROM inquiry_file WHERE
+		values((SELECT nvl(max(filenum),0) FROM inquiry_file WHERE
 		inquirynum
 		= #{inquiryNum}) + 1,#{inquiryNum},#{path})
 	</insert>

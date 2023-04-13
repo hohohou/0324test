@@ -11,12 +11,12 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script>
-        $( function() {
-            $('#main').click(function(){
-                location.href ='/';
+        $(function () {
+            $('#main').click(function () {
+                location.href = '/';
             })
         });
-        </script>
+    </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
     </style>
@@ -67,7 +67,7 @@
         }
 
         .user ul {
-            margin-right: 30px;
+            margin-right: 1px;
         }
 
         ul {
@@ -84,8 +84,48 @@
             margin-right: 20px;
             margin-top: -2px;
         }
-        #main{
+
+        #main {
             cursor: pointer;
+        }
+
+        .dropbtn {
+            
+            color: white;
+            width: 120px;
+            
+            font-size: 16px;
+            border: none;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 100px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            font-size: 16px;
+            color: black;
+            padding: 12px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
         }
 
        
@@ -105,15 +145,21 @@
                 <li><a href="/inquiry/list">문의한 내역</a></li>
                 <li><a href="/inquiry/admin/list" th:if="${session.addto != null}">문의 내역</a></li>
             </ul>
-            <a th:if="${session.dto == null} and ${session.addto == null}" href="/login/view">로그인/가입</a>
-            
-            <a th:if="${session.dto != null}" href="/inventory">[[${session.dto.nick}]]</a>
-            <a th:if="${session.dto != null}" href="/member/check/view"> &nbsp;&nbsp;&nbsp; 내정보 변경</a>
-            <a th:if="${session.dto != null}" href="/logout"> &nbsp;&nbsp;&nbsp; 로그아웃</a>
-            <a th:if="${session.addto != null}" href="/inventory">[[${session.addto.id}]]</a>
-            <a th:if="${session.addto != null}" href="/logout">&nbsp;&nbsp;&nbsp; 로그아웃</a>
-            
-            
+            <div class="dropdown">
+                <button class="dropbtn"><a th:if="${session.dto == null} and ${session.addto == null}"
+                        href="/login/view">로그인/가입</a> <a th:if="${session.dto != null}"
+                        href="/inventory/view">[[${session.dto.nick}]]</a></button>
+                <div class="dropdown-content">
+                    <a th:if="${session.dto != null}" href="/inventory/view"> &nbsp;&nbsp;&nbsp; 내 활동</a>
+                    <a th:if="${session.dto != null}" href="/member/check/view"> &nbsp;&nbsp;&nbsp; 내정보 변경</a>
+                    <a th:if="${session.dto != null}" href="/logout"> &nbsp;&nbsp;&nbsp; 로그아웃</a>
+                    <a th:if="${session.addto != null}" href="/inventory">[[${session.addto.id}]]</a>
+                    <a th:if="${session.addto != null}" href="/logout">&nbsp;&nbsp;&nbsp; 로그아웃</a>
+                </div>
+            </div>
+
+
+
         </div>
     </div>
 

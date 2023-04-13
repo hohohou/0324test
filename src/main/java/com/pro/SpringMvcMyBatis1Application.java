@@ -11,3 +11,4 @@ public class SpringMvcMyBatis1Application {
 	}
 
 }
+  

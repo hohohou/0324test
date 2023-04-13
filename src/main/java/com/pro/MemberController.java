@@ -22,6 +22,9 @@ import com.pro.service.MemberService;
 
 @Controller
 public class MemberController {
+	
+	private static String CLIENT_ID = "";
+	private static String CLIENT_SECRET = "";
 	private MemberService memberService;	
 	public MemberController(MemberService memberService) {
 		this.memberService = memberService;
@@ -174,6 +177,8 @@ public class MemberController {
 		
 		return "inventory";
 	}
+	
+	
 	
 
 	
